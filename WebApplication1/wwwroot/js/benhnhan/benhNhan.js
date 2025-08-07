@@ -121,9 +121,29 @@ $(document).ready(function () {
 
 function initAutoCalculation() {
     // Hàm định dạng số cải tiến
-    function formatNumber(num) {
+    //function formatNumber(num) {
+    //    num = num.toString().replace(/\./g, '');
+    //    return isNaN(num) ? '0' : parseInt(num).toLocaleString('vi-VN');
+    //}
+    function formatNumber(inputElement, num) {
+        // Lưu vị trí con trỏ và selection
+        const startPos = inputElement.selectionStart;
+        const endPos = inputElement.selectionEnd;
+        const originalLength = inputElement.value.length;
+
+        // Định dạng số
         num = num.toString().replace(/\./g, '');
-        return isNaN(num) ? '0' : parseInt(num).toLocaleString('vi-VN');
+        const formatted = isNaN(num) ? '0' : parseInt(num).toLocaleString('vi-VN');
+
+        // Gán giá trị đã định dạng
+        inputElement.value = formatted;
+
+        // Tính toán lại vị trí con trỏ
+        const newLength = inputElement.value.length;
+        const posDiff = newLength - originalLength;
+
+        // Khôi phục vị trí con trỏ
+        inputElement.setSelectionRange(startPos + posDiff, endPos + posDiff);
     }
 
     // Hàm parse số chắc chắn hơn
@@ -132,12 +152,19 @@ function initAutoCalculation() {
     }
 
     // Gắn sự kiện cho DonGia
-    $('#DonGia').off('input change').on('input change', function () {
-        let raw = $(this).val().replace(/[^\d]/g, '');
-        $(this).val(formatNumber(raw));
+    //$('#DonGia').off('input change').on('input change', function () {
+    //    let raw = $(this).val().replace(/[^\d]/g, '');
+    //    $(this).val(formatNumber(raw));
+    //    calculateAll();
+    //});
+    $('#DonGia').off('input change').on('input change', function (e) {
+        const input = this;
+        const raw = $(this).val().replace(/[^\d]/g, '');
+
+        // Sử dụng hàm formatNumber mới (truyền cả DOM element)
+        formatNumber(input, raw);
         calculateAll();
     });
-
     // Hàm tính toán cải tiến
     function calculateAll() {
         const soNgay = parseInt($('#SoNgayNhapVien').val()) || 0;
@@ -175,6 +202,7 @@ function initAutoCalculation() {
     // Tính toán ngay khi load
     calculateAll();
 }
+
 $(document).ready(function () {
     $('#danTocId').select2({
         theme: 'bootstrap-5',

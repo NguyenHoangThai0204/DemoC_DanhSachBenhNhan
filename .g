@@ -1,0 +1,23 @@
+﻿# Ignore Visual Studio temporary files
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# ASP.NET Core specific
+wwwroot/lib/
+node_modules/
+*.db
+*.sqlite
+
+# Others
+*.log
+*.vsidx
+*.sourcelink.json
