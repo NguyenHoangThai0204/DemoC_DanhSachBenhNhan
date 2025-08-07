@@ -141,7 +141,7 @@
  
 
 	<!-- Số ngày, đơn giá -->
-	<div class="row mb-3">
+	@* <div class="row mb-3">
 		<div class="col-md-4">
 			<label asp-for="SoNgayNhapVien" class="form-label">Số ngày nhập viện</label>
 			<input asp-for="SoNgayNhapVien" class="form-control text-end" readonly disabled />
@@ -160,8 +160,35 @@
 			<input type="hidden" id="TongTienRaw" name="TongTien"/>
 			<span asp-validation-for="TongTien" class="text-danger"></span>
 		</div>
-	</div>
+	</div> *@
 
+	<div class="row mb-3">
+		<div class="col-md-4">
+			<label asp-for="SoNgayNhapVien" class="form-label">Số ngày nhập viện</label>
+			<input asp-for="SoNgayNhapVien" class="form-control text-end" readonly disabled />
+			<span asp-validation-for="SoNgayNhapVien" class="text-danger"></span>
+		</div>
+		<div class="col-md-4">
+			<label asp-for="DonGia" class="form-label">Đơn giá</label>
+			<div class="input-group">
+				<input id="DonGia" name="DonGia" class="form-control text-end" type="text" inputmode="numeric"
+					   autocomplete="off" value="@(Model.DonGia?.ToString("N0"))" />
+				<div class="input-group-text">
+					<input type="checkbox" id="allowDecimal" title="Cho phép nhập số thập phân (dùng dấu ,)" />
+				</div>
+			</div>
+			<small class="form-text text-muted">Chọn để nhập dạng thập phân (vd: 1,05)</small>
+			<span asp-validation-for="DonGia" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-4">
+			<label asp-for="TongTien" class="form-label">Tổng tiền</label>
+			<input id="TongTien" class="form-control text-danger fw-bold text-end" type="text" readonly
+				   value="@(Model.TongTien?.ToString(ViewBag.DecimalFormat == true ? "N2" : "N0"))" disabled />
+			<input type="hidden" id="TongTienRaw" name="TongTien" />
+			<span asp-validation-for="TongTien" class="text-danger"></span>
+		</div>
+	</div>
 
 	<!-- Nút -->
 	<hr class="my-4" />
