@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\projectcASP\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\wwwroot\\js\\benhnhan\\benhnhan.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\wwwroot\\js\\benhnhan\\benhnhan.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\views\\benhnhan\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\wwwroot\\js\\benhnhan\\benhnhan.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\wwwroot\\js\\benhnhan\\benhnhan.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\controllers\\benhnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,52 +25,64 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 95,
-          "SelectedChildIndex": 2,
+          "DockedHeight": 110,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BenhNhanController.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\BenhNhanController.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\BenhNhanController.cs",
-              "ViewState": "AgIAAE0BAAAAAAAAAAAAwF0BAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T08:05:57.794Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAUwLQAAAAvAAAAAAAAAA==",
+              "Title": "DanhSach.cshtml",
+              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAIQAAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-04T12:44:00.934Z",
+              "WhenOpened": "2025-08-07T15:31:05.527Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "benhNhan.js",
               "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
               "RelativeDocumentMoniker": "WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
               "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
               "RelativeToolTip": "WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
-              "ViewState": "AgIAAMcDAAAAAAAAAAAUwOADAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAGQBAAAAAAAAAAAwwF0BAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-06T07:44:44.055Z",
+              "WhenOpened": "2025-08-07T14:58:27.638Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BenhNhanController.cs",
+              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\BenhNhanController.cs",
+              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\BenhNhanController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0BAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T08:05:57.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
+              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAuwL0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-04T12:44:00.934Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedHeight": 49,
+          "DockedHeight": 34,
           "SelectedChildIndex": -1,
           "Children": [
             {

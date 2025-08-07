@@ -2,6 +2,7 @@ wwwroot\css\site.css
 wwwroot\dulieu\dantoc.json
 wwwroot\dulieu\tinhthanh.json
 wwwroot\favicon.ico
+wwwroot\js\benhnhan\benhNhan.js
 wwwroot\js\benhnhan\danhsach.js
 wwwroot\js\loadThongTin.js
 wwwroot\lib\.package-lock.json
@@ -5732,4 +5733,3 @@ wwwroot\lib\select2\src\scss\theme\default\_single.scss
 wwwroot\lib\select2\src\scss\_dropdown.scss
 wwwroot\lib\select2\src\scss\_multiple.scss
 wwwroot\lib\select2\src\scss\_single.scss
-wwwroot\js\benhnhan\benhNhan.js
