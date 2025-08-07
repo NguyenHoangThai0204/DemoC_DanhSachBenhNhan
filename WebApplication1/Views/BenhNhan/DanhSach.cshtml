@@ -1,0 +1,325 @@
+﻿@model List<WebApplication1.Models.BenhNhan>
+@using Newtonsoft.Json
+
+<h2>Danh sách bệnh nhân</h2>
+
+
+<div style="margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+	<!-- Tìm theo tên bệnh nhân -->
+	<div class="mb-3" style="flex: 1 1 100%; min-width: 0;">
+		<input type="text" class="form-control"
+			   style="font-size: 1rem; width: 100%; max-width: 100%; box-sizing: border-box;"
+			   placeholder="Tìm theo tên bệnh nhân"
+			   id="searchInputTen">
+	</div>
+
+	<div class="button-container">
+		<!-- Dropdown chọn cột -->
+		<div class="column-toggle-dropdown">
+			<button class="btn btn-secondary mb-3" style="font-size: 1.35rem;">Chọn cột hiển thị</button>
+			<div class="dropdown-menu">
+				<label>
+					<input type="checkbox" id="toggle-all" checked> Chọn tất cả
+				</label>
+				<label><input type="checkbox" class="toggle-col" data-col="1" checked> Mã bệnh nhân</label>
+				<label><input type="checkbox" class="toggle-col" data-col="2" checked> Họ tên</label>
+				<label><input type="checkbox" class="toggle-col" data-col="3" checked> Ngày sinh</label>
+				<label><input type="checkbox" class="toggle-col" data-col="4" checked> Giới tính</label>
+				<label><input type="checkbox" class="toggle-col" data-col="5" checked> Dân tộc</label>
+				<label><input type="checkbox" class="toggle-col" data-col="6" checked> Tỉnh thành</label>
+				<label><input type="checkbox" class="toggle-col" data-col="7" checked> Ngày nhập viện</label>
+				<label><input type="checkbox" class="toggle-col" data-col="8" checked> Ngày xuất viện</label>
+				<label><input type="checkbox" class="toggle-col" data-col="9" checked> Số ngày</label>
+				<label><input type="checkbox" class="toggle-col" data-col="10" checked> Đơn giá</label>
+				<label><input type="checkbox" class="toggle-col" data-col="11" checked> Tổng tiền</label>
+				<label><input type="checkbox" class="toggle-col" data-col="12" checked> Thao tác</label>
+			</div>
+		</div>
+		<div class="column-toggle-dropdown">
+			<button class="btn btn-secondary mb-3" style="font-size: 1.35rem;">Chức năng nâng cao</button>
+			<div class="dropdown-menu">
+				<label>
+					<button id="btnExportPDF" class="btn btn-outline-danger mb-3" style="font-size: 1.2rem;">
+						<i class="bi bi-file-earmark-pdf"></i> Xuất PDF
+					</button>
+				</label>
+				<label>
+					<button id="btnExportExcel" class="btn btn-outline-success mb-3" style="font-size: 1.2rem;">
+						<i class="bi bi-file-earmark-excel"></i> Xuất Excel
+					</button>
+				</label>
+				<label>
+					<input type="checkbox" id="toggleDecimal" class="toggle-col" data-col="13"> Load tiền dạng thập phân
+				</label>
+			</div>
+		</div>
+
+		<div class="column-toggle-dropdown">
+			<button type="button"
+					class="btn btn-success mb-3"
+					data-bs-toggle="modal"
+					style="font-size: 1.35rem;"
+					data-bs-target="#addBenhNhanModal"
+					data-url="/BenhNhan/Add">
+				Thêm mới bệnh nhân
+			</button>
+		</div>
+
+	</div>
+</div>
+
+<script src="./js/benhnhan/danhsach.js">
+</script>
+
+<!-- Modal Thêm bệnh nhân -->
+<div class="modal fade" id="addBenhNhanModal" tabindex="-1" aria-labelledby="addBenhNhanModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTitle">Thêm mới bệnh nhân</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div id="addBenhNhanFormContainer"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="table-wrapper">
+	<table style="width:100%; table-layout: fixed;" border="1" cellpadding="8">
+		<thead>
+			<tr>
+				<th style="width: 3%">STT</th>
+				<th style="width: 10%">Mã bệnh nhân</th>
+				<th style="width: 21%">Họ tên</th>
+				<th style="width: 8%">Ngày sinh</th>
+				<th style="width: 6%">Giới tính</th>
+				<th style="width: 6%">Dân tộc</th>
+				<th style="width: 10%">Tỉnh thành</th>
+				<th style="width: 10%">Ngày nhập viện</th>
+				<th style="width: 10%">Ngày xuất viện</th>
+				<th style="width: 5%">Số ngày</th>
+				<th style="width: 7%">Đơn giá</th>
+				<th style="width: 8%">Tổng tiền</th>
+				<th style="width: 6%">Thao tác</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				int index = ((ViewBag.CurrentPage ?? 1) - 1) * (ViewBag.PageSize ?? 5) + 1;
+			}
+			@foreach (var bn in Model)
+			{
+				<tr>
+					<td>@index</td>
+					<td>@bn.MaBenhNhan</td>
+					<td style="text-align:left;">@bn.Nguoi.HoTen</td>
+					<td>
+						@(bn.Nguoi.NgaySinh.HasValue? bn.Nguoi.NgaySinh.Value.ToString("dd-MM-yyyy") : "")
+					</td>
+					<td>@bn.Nguoi.GioiTinh</td>
+
+					<td style="text-align:left;">@(bn.Nguoi.DanToc?.TenDanToc ?? "Không rõ")</td>
+					<td style="text-align:left;">@(bn.Nguoi.TinhThanh?.TenTinh ?? "Không rõ")</td>
+					<td>@bn.NgayNhapVien.ToString("dd-MM-yyyy HH:mm")</td>
+					<td>@(bn.NgayXuatVien.HasValue? bn.NgayXuatVien.Value.ToString("dd-MM-yyyy") : "")</td>
+					<td class="tdTien">@bn.SoNgayNhapVien</td>
+					<td class="tdTien" data-format="currency">
+						@(ViewBag.DecimalFormat == true ? bn.DonGia?.ToString("N2") : bn.DonGia?.ToString("N0"))
+					</td>
+					<td class="tdTien" data-format="currency">
+						@(ViewBag.DecimalFormat == true ? bn.TongTien?.ToString("N2") : bn.TongTien?.ToString("N0"))
+					</td>
+					<td>
+
+						<a href="#" class="btn btn-sm btn-info"
+						   data-bs-toggle="modal"
+						   data-bs-target="#addBenhNhanModal"
+						   data-url="/BenhNhan/Edit/@bn.MaBenhNhan"
+						   title="Sửa">
+							<i class="bi bi-pencil-square"></i>
+						</a>
+						<!-- Xóa -->
+
+						<form asp-action="Delete" asp-controller="BenhNhan"
+							  asp-route-id="@bn.MaBenhNhan"
+							  asp-route-currentPage="@ViewBag.CurrentPage"
+							  method="post" style="display:inline;">
+							<button type="submit" class="btn btn-sm btn-danger" title="Xóa"
+									onclick="return confirm('Bạn có chắc muốn xóa?');">
+								<i class="bi bi-trash"></i>
+							</button>
+						</form>
+
+					</td>
+
+				</tr>
+				index++;
+			}
+		</tbody>
+
+	</table>
+</div>
+
+<div style="margin-top: 20px;     display: flex ; justify-content: space-between;">
+	<!-- Dropdown chọn số lượng bản ghi -->
+	<div class="mb-3" style="display: inline-block;">
+		<label for="pageSizeSelect" class="form-label">Số bản ghi mỗi trang:</label>
+		<select id="pageSizeSelect" class="form-select" style="width: auto; display: inline-block;">
+			<option value="3">3</option>
+			<option value="5" selected>5</option>
+			<option value="7">7</option>
+			<option value="10">10</option>
+		</select>
+	</div>
+
+	<!-- Phân trang -->
+	<nav aria-label="Page navigation">
+		<ul class="pagination justify-content-center">
+			@if ((ViewBag.CurrentPage ?? 1) > 1)
+			{
+				<li class="page-item">
+					<a class="page-link" style=" font-size: 1.35rem !important;" asp-action="DanhSach" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-pageSize="@ViewBag.PageSize">
+						<span style=" font-size: 1.35rem !important;" aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+			}
+
+
+			@{
+				int current = ViewBag.CurrentPage ?? 1;
+				int total = ViewBag.TotalPages ?? 1;
+			}
+			@for (int i = 1; i <= total; i++)
+			{
+				<li class="page-item @(i == current ? "active" : "")">
+					<a class="page-link" style=" font-size: 1.35rem !important;" asp-action="DanhSach" asp-route-page="@i" asp-route-pageSize="@ViewBag.PageSize">@i</a>
+				</li>
+			}
+
+			@if ((ViewBag.CurrentPage ?? 1) < ViewBag.TotalPages)
+			{
+				<li class="page-item">
+					<a class="page-link" style=" font-size: 1.35rem !important;" asp-action="DanhSach" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-pageSize="@ViewBag.PageSize">
+						<span style=" font-size: 1.35rem !important;" aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			}
+		</ul>
+	</nav>
+</div>
+
+@section Scripts {
+	<script src="~/js/benhnhan/benhNhan.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const decimalCheckbox = document.getElementById('toggleDecimal');
+
+			// 1. Kiểm tra localStorage trước, nếu không có thì dùng giá trị từ ViewBag
+			const savedDecimalPref = localStorage.getItem('decimalFormat');
+			const initialDecimalValue = savedDecimalPref !== null
+				? JSON.parse(savedDecimalPref)
+				: @(Json.Serialize(ViewBag.DecimalFormat ?? false));
+
+			// 2. Áp dụng giá trị ban đầu
+			decimalCheckbox.checked = initialDecimalValue;
+
+			// 3. Nếu giá trị localStorage khác với ViewBag, cập nhật URL
+			if (savedDecimalPref !== null && JSON.parse(savedDecimalPref) !== @(Json.Serialize(ViewBag.DecimalFormat ?? false))) {
+				const currentUrl = new URL(window.location.href);
+				currentUrl.searchParams.set('decimalFormat', initialDecimalValue);
+				window.location.href = currentUrl.toString();
+			}
+
+			decimalCheckbox.addEventListener('change', function() {
+				const showDecimal = this.checked;
+
+				// 4. Lưu vào localStorage
+				localStorage.setItem('decimalFormat', showDecimal);
+
+				// 5. Cập nhật URL và tải lại trang
+				const currentUrl = new URL(window.location.href);
+				currentUrl.searchParams.set('decimalFormat', showDecimal);
+				window.location.href = currentUrl.toString();
+			});
+		});
+		// xử lí trong việc xuất pdf hay excel
+
+		$(document).ready(function () {
+			$('#btnExportExcel').click(function (e) {
+				e.preventDefault();
+
+				const btn = this;
+				btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang tạo Excel...';
+				btn.disabled = true;
+
+				fetch("/BenhNhan/ExportToExcel", {
+					method: "GET"
+				})
+				.then(response => {
+					if (!response.ok) {
+						return response.text().then(text => { throw new Error(text || "Không thể tải file Excel") });
+					}
+					return response.blob();
+				})
+				.then(blob => {
+					const url = window.URL.createObjectURL(blob);
+					const a = document.createElement("a");
+					a.href = url;
+					a.download = "DanhSachBenhNhan.xlsx";
+					document.body.appendChild(a);
+					a.click();
+					a.remove();
+					window.URL.revokeObjectURL(url);
+				})
+				.catch(error => {
+					console.error("Error:", error);
+					alert("Lỗi khi xuất Excel: " + error.message);
+				})
+				.finally(() => {
+					btn.innerHTML = '<i class="bi bi-file-earmark-excel"></i> Xuất Excel';
+					btn.disabled = false;
+				});
+			});
+		});
+
+		document.getElementById("btnExportPDF").addEventListener("click", function () {
+			const btn = this;
+			btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang tạo PDF...';
+			btn.disabled = true;
+
+			fetch("/export/pdf", {
+				method: "GET",
+				headers: {
+					'Accept': 'application/pdf'
+				}
+			})
+			.then(response => {
+				if (!response.ok) {
+					return response.text().then(text => { throw new Error(text || "Không thể tải file PDF") });
+				}
+				return response.blob();
+			})
+			.then(blob => {
+				const url = window.URL.createObjectURL(blob);
+				const a = document.createElement("a");
+				a.href = url;
+				a.download = "DanhSachBenhNhan.pdf";
+				document.body.appendChild(a);
+				a.click();
+				a.remove();
+				window.URL.revokeObjectURL(url);
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				alert("Lỗi khi xuất PDF: " + error.message);
+			})
+			.finally(() => {
+				btn.innerHTML = '<i class="bi bi-file-earmark-pdf"></i> Xuất PDF';
+				btn.disabled = false;
+			});
+		});
+	</script>
+}

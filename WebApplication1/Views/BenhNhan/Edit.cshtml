@@ -1,0 +1,185 @@
+﻿@model WebApplication1.Models.BenhNhan
+@{
+	Layout = null;
+}
+
+<form method="post" style="width:100%; margin:auto;" asp-action="Edit" asp-controller="BenhNhan">
+	<input type="hidden" name="currentPage" value="@Context.Request.Query["currentPage"]" />
+	<input type="hidden" name="pageSize" value="@Context.Request.Query["pageSize"]" />
+	<!-- Mã bệnh nhân & Họ tên -->
+	<div class="row mb-3">
+		<div class="col-md-6">
+			<label asp-for="MaBenhNhan" class="form-label">Mã bệnh nhân</label>
+			<input asp-for="MaBenhNhan" class="form-control" readonly />
+		</div>
+		<div class="col-md-6">
+			<label asp-for="Nguoi.HoTen" class="form-label">Họ tên</label>
+			<input asp-for="Nguoi.HoTen" class="form-control" required/>
+			<span asp-validation-for="Nguoi.HoTen" class="text-danger"></span>
+		</div>
+	</div>
+
+	<!-- Ngày sinh & Giới tính -->
+	<div class="row mb-3">
+		<div class="col-md-6">
+			<label class="form-label">Ngày sinh</label>
+			<div class="input-group">
+				<input type="text"
+					   class="form-control"
+					   id="ngaySinh"
+					   name="Nguoi.NgaySinh"
+					   placeholder="dd-mm-yyyy"
+					   autocomplete="off"
+					   required
+					   value="@(Model?.Nguoi?.NgaySinh.HasValue == true ? Model.Nguoi.NgaySinh.Value.ToString("dd-MM-yyyy") : "")" />
+				<span class="input-group-text cursor-pointer" id="datepicker-trigger">
+					<i class="bi bi-calendar"></i>
+				</span>
+			</div>
+			<span asp-validation-for="Nguoi.NgaySinh" class="text-danger"></span>
+		</div>
+		<div class="col-md-6">
+			<label asp-for="Nguoi.GioiTinh" class="form-label">Giới tính</label>
+			<select asp-for="Nguoi.GioiTinh" class="form-control" required>
+				<option value="">-- Chọn giới tính --</option>
+				<option value="Nam">Nam</option>
+				<option value="Nữ">Nữ</option>
+			</select>
+			<span asp-validation-for="Nguoi.GioiTinh" class="text-danger"></span>
+		</div>
+	</div>
+	<!-- Ngày nhập viện & xuất viện -->
+	<div class="row mb-3">
+		<div class="col-md-6">
+			<label asp-for="NgayNhapVien" class="form-label">Ngày nhập viện</label>
+			<div class="input-group">
+				<input type="text"
+					   class="form-control date-input"
+					   id="ngayNhapVien"
+					   name="NgayNhapVien"
+					   placeholder="dd-mm-yyyy"
+					   autocomplete="off"
+					   required  
+					   value="@(Model.NgayNhapVien.ToString("dd-MM-yyyy HH:mm"))" />
+				<span class="input-group-text cursor-pointer" id="datepicker-trigger">
+					<i class="bi bi-calendar"></i>
+				</span>
+			</div>
+			<span asp-validation-for="NgayNhapVien" class="text-danger"></span>
+		</div>
+		<div class="col-md-6">
+			<label asp-for="NgayXuatVien" class="form-label">Ngày xuất viện</label>
+			<div class="input-group">
+				<input type="text"
+					   class="form-control date-input"
+					   id="ngayXuatVien"
+					   name="NgayXuatVien"
+					   placeholder="dd-mm-yyyy"
+					   autocomplete="off" 
+					   value="@(Model?.NgayXuatVien.HasValue == true ? Model.NgayXuatVien.Value.ToString("dd-MM-yyyy") : "")" />
+				<span class="input-group-text cursor-pointer" id="datepicker-trigger">
+					<i class="bi bi-calendar"></i>
+				</span>
+			</div>
+			<span asp-validation-for="NgayXuatVien" class="text-danger"></span>
+		</div>
+	</div>
+	<!-- Dân tộc & Tỉnh thành -->
+	
+	 <div class="row mt-3">
+    <!-- Dân tộc -->
+    <div class="col-md-6">
+        <div class="form-group dan-toc-container">
+            <label class="form-label">Dân tộc</label>
+            <div style="position: relative;">
+                <input type="text" id="danTocInput" class="form-control" 
+                       value="@Model.Nguoi.DanToc?.TenDanToc" 
+                       placeholder="Nhập hoặc chọn dân tộc" autocomplete="off" />
+                <input type="hidden" name="Nguoi.DanTocId" id="danTocIdHidden" value="@Model.Nguoi.DanTocId" />
+                <div id="danTocDropdown" style="display: none;">
+                    @foreach (var dt in (List<WebApplication1.Models.DanToc>)ViewBag.DanTocList)
+                    {
+                        <div class="dan-toc-item"
+                             data-id="@dt.Id"
+                             data-name="@dt.TenDanToc.ToLower()"
+                             data-viettat='@dt.VietTat?.ToLower()'>
+                            @dt.TenDanToc.Trim()
+                        </div>
+                    }
+                </div>
+            </div>
+            <span asp-validation-for="Nguoi.DanTocId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Tỉnh/Thành -->
+    <div class="col-md-6">
+        <div class="form-group tinh-thanh-container">
+            <label class="form-label">Tỉnh/Thành</label>
+            <div style="position: relative;">
+                <input type="text" id="tinhThanhInput" 
+                       class="form-control" 
+                       placeholder="Nhập tỉnh hoặc thành phố" 
+                       autocomplete="off"
+                       value="@Model.Nguoi.TinhThanh?.TenTinh" />
+
+                <!-- Các hidden inputs -->
+                <input type="hidden" name="Nguoi.TinhThanhId" id="tinhThanhIdHidden" value="@Model.Nguoi.TinhThanhId" />
+                <input type="hidden" name="Nguoi.TinhThanh.MaTinh" id="tinhThanhMaHidden" value="@Model.Nguoi.TinhThanh?.MaTinh" />
+                <input type="hidden" name="Nguoi.TinhThanh.TenTinh" id="tinhThanhTenHidden" value="@Model.Nguoi.TinhThanh?.TenTinh" />
+                <input type="hidden" name="Nguoi.TinhThanh.VietTat" id="tinhThanhVietTatHidden"
+                       value="@Html.Raw(Json.Serialize(Model.Nguoi.TinhThanh?.VietTatArray))" />
+
+                <div id="tinhThanhDropdown" class="dropdown-menu show"
+                     style="display: none; position: absolute; width: 100%; z-index: 1055; max-height: 200px; overflow-y: auto; font-size: 1.3rem; background: white; border: 1px solid #ccc; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+                    <!-- JS sẽ render -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+	<!-- Số ngày, đơn giá -->
+	<div class="row mb-3">
+		<div class="col-md-4">
+			<label asp-for="SoNgayNhapVien" class="form-label">Số ngày nhập viện</label>
+			<input asp-for="SoNgayNhapVien" class="form-control text-end" readonly disabled />
+			<span asp-validation-for="SoNgayNhapVien" class="text-danger"></span>
+		</div>
+		<div class="col-md-4">
+			<label asp-for="DonGia" class="form-label">Đơn giá</label>
+			<input id="DonGia" name="DonGia" class="form-control text-end" type="text" inputmode="numeric"
+				   autocomplete="off" value="@(Model.DonGia?.ToString("N0"))" />
+			<span asp-validation-for="DonGia" class="text-danger"></span>
+		</div>
+		<div class="col-md-4">
+			<label asp-for="TongTien" class="form-label">Tổng tiền</label>
+			<input id="TongTien" class="form-control text-danger fw-bold text-end" type="text" readonly
+				   value="@(Model.TongTien?.ToString("N0"))" disabled />
+			<input type="hidden" id="TongTienRaw" name="TongTien"/>
+			<span asp-validation-for="TongTien" class="text-danger"></span>
+		</div>
+	</div>
+
+
+	<!-- Nút -->
+	<hr class="my-4" />
+	<div class="row mt-4">
+		<div class="col-12 d-flex justify-content-end">
+			<div style="width: 20%;">
+				<div class="d-flex gap-2">
+					<button type="submit" class="btn btn-primary w-50">Lưu</button>
+					<a href="@Url.Action("DanhSach", "BenhNhan")" class="btn btn-secondary w-50">Đóng</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script src="~/js/benhnhan/benhNhan.js"></script>
+
+
+@section Scripts {
+	<script src="~/js/benhnhan/benhNhan.js"></script>
+		
+}

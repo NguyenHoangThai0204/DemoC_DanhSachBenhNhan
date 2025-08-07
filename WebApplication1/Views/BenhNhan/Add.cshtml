@@ -1,0 +1,110 @@
+﻿
+
+
+@{
+	Layout = null;
+}
+
+@* <script></script> *@
+@model WebApplication1.Models.BenhNhan
+
+<form asp-action="Add" asp-controller="BenhNhan" method="post" style="width:100%; margin:auto;">
+	<div class="row">
+		<!-- Họ tên + ngày sinh -->
+		<div class="col-md-6">
+			<div class="form-group">
+				<label asp-for="Nguoi.HoTen" class="form-label">Họ tên</label>
+				<input asp-for="Nguoi.HoTen" class="form-control" required />
+				<span asp-validation-for="Nguoi.HoTen" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Ngày sinh</label>
+				<div class="input-group">
+					<input type="text" class="form-control" id="ngaySinh" name="Nguoi.NgaySinh"
+						   placeholder="dd-mm-yyyy" autocomplete="off" required />
+					<span class="input-group-text cursor-pointer" id="datepicker-trigger">
+						<i class="bi bi-calendar"></i>
+					</span>
+				</div>
+				<span asp-validation-for="Nguoi.NgaySinh" class="text-danger"></span>
+			</div>
+		</div>
+
+		<!-- Ngày nhập viện + giới tính -->
+		<div class="col-md-6">
+			<div class="form-group">
+				<label asp-for="NgayNhapVien" class="form-label">Ngày nhập viện</label>
+				<input asp-for="NgayNhapVien" type="datetime-local" class="form-control" required id="ngayNhapVienInput" style="display: none;" />
+				<input type="text" class="form-control" id="ngayNhapVienDisplay" readonly disabled />
+				<span asp-validation-for="NgayNhapVien" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Nguoi.GioiTinh" class="form-label">Giới tính</label>
+				<select asp-for="Nguoi.GioiTinh" class="form-control" required>
+					<option value="">-- Chọn giới tính --</option>
+					<option value="Nam">Nam</option>
+					<option value="Nữ">Nữ</option>
+				</select>
+				<span asp-validation-for="Nguoi.GioiTinh" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<!-- Dân tộc -->
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="form-label">Dân tộc</label>
+				<div style="position: relative;">
+					<input type="text" id="danTocInput" class="form-control" placeholder="Nhập hoặc chọn dân tộc" autocomplete="off" />
+					<input type="hidden" name="Nguoi.DanTocId" id="danTocIdHidden" />
+					<div id="danTocDropdown">
+						@foreach (var dt in (List<WebApplication1.Models.DanToc>)ViewBag.DanTocList)
+						{
+							<div class="dan-toc-item"
+								 data-id="@dt.Id"
+								 data-name="@dt.TenDanToc.ToLower()"
+								 data-viettat='@dt.VietTat?.ToLower()'>
+								@dt.TenDanToc.Trim()
+							</div>
+						}
+					</div>
+				</div>
+				<span asp-validation-for="Nguoi.DanTocId" class="text-danger"></span>
+			</div>
+		</div>
+
+		<!-- Tỉnh/Thành -->
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="form-label">Tỉnh/Thành</label>
+				<div style="position: relative;">
+					<input type="text" id="tinhThanhInput" class="form-control" placeholder="Nhập tỉnh hoặc thành phố" autocomplete="off" />
+					<!-- Các input hidden cần thêm -->
+					<input type="hidden" name="Nguoi.TinhThanhId" id="tinhThanhIdHidden" />
+					<input type="hidden" name="Nguoi.TinhThanh.MaTinh" id="tinhThanhMaHidden" />
+					<input type="hidden" name="Nguoi.TinhThanh.TenTinh" id="tinhThanhTenHidden" />
+					<input type="hidden" name="Nguoi.TinhThanh.VietTat" id="tinhThanhVietTatHidden" />
+
+					<div id="tinhThanhDropdown" class="dropdown-menu show" style="display: none; position: absolute; width: 100%; z-index: 1055; max-height: 200px; overflow-y: auto; font-size: 1.3rem; background: white; border: 1px solid #ccc; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+						<!-- Render JS -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr class="my-4" />
+	<div class="row mt-4">
+		<div class="col-12 d-flex justify-content-end">
+			<div style="width: 20%;">
+				<div class="d-flex gap-2">
+					<button type="submit" class="btn btn-primary w-50">Lưu</button>
+					<a href="@Url.Action("DanhSach", "BenhNhan")" class="btn btn-secondary w-50">Đóng</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script src="~/js/benhnhan/benhNhan.js"></script>
