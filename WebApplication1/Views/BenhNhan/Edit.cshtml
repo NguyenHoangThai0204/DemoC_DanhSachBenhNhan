@@ -205,7 +205,9 @@
 	</div>
 </form>
 <script src="~/js/benhnhan/benhNhan.js"></script>
-
+<script>
+	var isDecimalFromServer = @(Model.DonGia % 1 != 0 ? "true" : "false") === "true";
+</script>
 
 @section Scripts {
 	<script src="~/js/benhnhan/benhNhan.js"></script>

@@ -224,6 +224,26 @@
 @section Scripts {
 	<script src="~/js/benhnhan/benhNhan.js"></script>
 	<script>
+		$(document).ready(function() {
+			// Hiển thị thông báo thành công
+			var successMessage = '@Html.Raw(TempData["SuccessMessage"] as string)';
+			if (successMessage) {
+				alert(decodeHTMLEntities(successMessage));
+			}
+
+			// Hiển thị thông báo lỗi
+			var errorMessage = '@Html.Raw(TempData["ErrorMessage"] as string)';
+			if (errorMessage) {
+				alert(decodeHTMLEntities(errorMessage));
+			}
+
+			// Hàm giải mã HTML entities
+			function decodeHTMLEntities(text) {
+				var textArea = document.createElement('textarea');
+				textArea.innerHTML = text;
+				return textArea.value;
+			}
+		});
 				// Đồng bộ số lượng bản ghi khi load trang
 		document.addEventListener('DOMContentLoaded', function() {
 			const pageSizeSelect = document.getElementById('pageSizeSelect');
