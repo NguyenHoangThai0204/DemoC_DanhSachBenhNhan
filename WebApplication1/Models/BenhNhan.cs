@@ -20,7 +20,7 @@ namespace WebApplication1.Models
 
         public DateTime NgayNhapVien { get; set; }
         public DateTime? NgayXuatVien { get; set; }
-
+        public bool Active { get; set; } = true;
         public int? SoNgayNhapVien { get; set; } // Nullable vì có thể chưa xuất viện
 
         [Column(TypeName = "decimal(22,2)")]

@@ -14,6 +14,8 @@ namespace WebApplication1.Models
         public string MaTinh { get; set; }
         // tên tỉnh
         public string TenTinh { get; set; }
+
+        public bool Active { get; set; } = true;
         public string? VietTat { get; set; }
         [NotMapped]
         public List<string> VietTatArray

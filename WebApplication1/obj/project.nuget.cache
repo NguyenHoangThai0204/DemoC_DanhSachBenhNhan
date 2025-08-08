@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qIwFdM8Ip8k=",
+  "dgSpecHash": "bXgJaMCNtw4=",
   "success": true,
-  "projectFilePath": "D:\\projectcASP\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "D:\\ThucTap\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
@@ -78,9 +78,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'iTextSharp 5.5.13.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "projectPath": "D:\\projectcASP\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "D:\\ThucTap\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "warningLevel": 1,
-      "filePath": "D:\\projectcASP\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "filePath": "D:\\ThucTap\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "libraryId": "iTextSharp",
       "targetGraphs": [
         "net8.0"

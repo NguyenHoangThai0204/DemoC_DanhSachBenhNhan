@@ -1,38 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\projectcASP\\WebApplication1\\",
+  "WorkspaceRootPath": "D:\\ThucTap\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\controllers\\benhnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\benhnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\wwwroot\\js\\benhnhan\\benhnhan.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\wwwroot\\js\\benhnhan\\benhnhan.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\models\\benhnhansto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\benhnhansto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\views\\benhnhan\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\views\\benhnhan\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\controllers\\benhnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\benhnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\models\\benhnhan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\models\\benhnhan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\benhnhan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\models\\nguoi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\nguoi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\projectcasp\\webapplication1\\webapplication1\\views\\benhnhan\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\models\\benhnhansto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\benhnhansto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,116 +45,126 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 113,
-          "SelectedChildIndex": 6,
+          "DockedHeight": 120,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Nguoi.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Models\\Nguoi.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\Nguoi.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Models\\Nguoi.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\Nguoi.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T08:01:52.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\data\\AppDbContext.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\data\\AppDbContext.cs",
-              "RelativeToolTip": "WebApplication1\\data\\AppDbContext.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAzwA0AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T07:56:39.433Z",
+              "DocumentIndex": 0,
+              "Title": "benhNhan.js",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
+              "RelativeDocumentMoniker": "WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
+              "RelativeToolTip": "WebApplication1\\wwwroot\\js\\benhnhan\\benhNhan.js",
+              "ViewState": "AgIAALgBAAAAAAAAAAAAALwBAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-08T16:51:28.961Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "BenhNhanSTO.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Models\\BenhNhanSTO.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\BenhNhanSTO.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Models\\BenhNhanSTO.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\BenhNhanSTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T07:56:17.134Z",
+              "Title": "Add.cshtml",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Add.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\Add.cshtml",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Add.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\Add.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-08T16:44:56.421Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Program.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Program.cs",
-              "RelativeToolTip": "WebApplication1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABaAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\data\\AppDbContext.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\data\\AppDbContext.cs",
+              "RelativeToolTip": "WebApplication1\\data\\AppDbContext.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAwwA0AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T06:05:49.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-08T07:56:39.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BenhNhanSTO.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Models\\BenhNhanSTO.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\BenhNhanSTO.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Models\\BenhNhanSTO.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\BenhNhanSTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T07:56:17.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T06:05:49.957Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "BenhNhan.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Models\\BenhNhan.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Models\\BenhNhan.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Models\\BenhNhan.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Models\\BenhNhan.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Models\\BenhNhan.cs",
               "RelativeToolTip": "WebApplication1\\Models\\BenhNhan.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAA6wBMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAmwBYAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T06:03:50.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-08T06:03:50.576Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "DanhSach.cshtml",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
               "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
               "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
-              "ViewState": "AgIAAOoAAAAAAAAAAAAQwOoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFIAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-07T15:31:05.527Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "BenhNhanController.cs",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\BenhNhanController.cs",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Controllers\\BenhNhanController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\BenhNhanController.cs",
-              "ViewState": "AgIAALABAAAAAAAAAAAYwLsBAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAuwDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-07T08:05:57.794Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
               "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
-              "ToolTip": "D:\\projectcASP\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
               "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\Edit.cshtml",
-              "ViewState": "AgIAALUAAAAAAAAAAAAkwNYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAALcAAAAAAAAAAAAAANYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-04T12:44:00.934Z"
+              "WhenOpened": "2025-08-04T12:44:00.934Z",
+              "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedHeight": 31,
+          "DockedHeight": 24,
           "SelectedChildIndex": -1,
           "Children": [
             {

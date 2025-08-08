@@ -15,6 +15,8 @@ namespace WebApplication1.Models
         public string TenDanToc { get; set; }
         // mảng các chữ viết tắt của dân tộc
 
+        public bool Active { get; set; } = true;
+
         //public string[]? VietTat { get; set; }    
         // ⚠️ Đây là chuỗi JSON được lưu trong DB
         public string? VietTat { get; set; }
@@ -26,6 +28,7 @@ namespace WebApplication1.Models
                 : System.Text.Json.JsonSerializer.Deserialize<string[]>(VietTat);
             set => VietTat = System.Text.Json.JsonSerializer.Serialize(value);
         }
+
 
     }
 }

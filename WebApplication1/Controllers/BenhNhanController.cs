@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(BenhNhan model, int currentPage)
+        public async Task<IActionResult> Add(BenhNhan model, int currentPage = 1, int pageSize = 5)
         {
             if (ModelState.IsValid)
             {
@@ -59,15 +59,18 @@ namespace WebApplication1.Controllers
                 if (success)
                 {
                     TempData["SuccessMessage"] = "Thêm bệnh nhân thành công!";
-                    return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+                    //return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+                    return RedirectToAction("DanhSach", new { page = currentPage, pageSize });
                 }
 
                 TempData["ErrorMessage"] = errorMessage ?? "Không thể thêm bệnh nhân";
-                return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+                //return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+                return RedirectToAction("DanhSach", new { page = currentPage, pageSize });
             }
 
             TempData["ErrorMessage"] = "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.";
-            return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+            //return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+            return RedirectToAction("DanhSach", new { page = currentPage, pageSize });
         }
 
         [HttpPost("BenhNhan/Edit/{MaBenhNhan}")]
@@ -191,27 +194,8 @@ namespace WebApplication1.Controllers
                 return (false, ex.Message);
             }
         }
-        // Hàm riêng để cập nhật thông tin
-        //private void UpdateBenhNhanInfo(BenhNhan existing, BenhNhan model)
-        //{
-        //    existing.Nguoi.HoTen = model.Nguoi.HoTen;
-        //    existing.Nguoi.GioiTinh = model.Nguoi.GioiTinh;
-        //    existing.Nguoi.NgaySinh = model.Nguoi.NgaySinh;
-        //    existing.Nguoi.DanTocId = model.Nguoi.DanTocId;
-
-        //    existing.NgayNhapVien = model.NgayNhapVien;
-        //    existing.NgayXuatVien = model.NgayXuatVien;
-        //    existing.DonGia = model.DonGia;
-
-        //    if (model.NgayXuatVien.HasValue)
-        //    {
-        //        var ngayNhap = model.NgayNhapVien.Date;
-        //        var ngayXuat = model.NgayXuatVien.Value.Date;
-        //        existing.SoNgayNhapVien = (ngayXuat - ngayNhap).Days + 1;
-        //        existing.TongTien = existing.SoNgayNhapVien * (model.DonGia ?? 0);
-        //    }
-        //}
-
+        
+        
         [HttpGet("BenhNhan/Edit/{MaBenhNhan}")]
         public async Task<IActionResult> Edit(string MaBenhNhan)
         {
@@ -267,6 +251,7 @@ namespace WebApplication1.Controllers
             }
             return View(model);
         }
+        // chỉnh lại trạng thái của bệnh nhân
         [HttpPost]
         public async Task<IActionResult> Delete(string id, int currentPage = 1, int pageSize = 5)
         {
@@ -274,6 +259,7 @@ namespace WebApplication1.Controllers
             {
                 var benhNhan = await _dbService.BenhNhans
                     .Include(bn => bn.Nguoi)
+                    .ThenInclude(n => n.TinhThanh) // Thêm ThenInclude nếu cần
                     .FirstOrDefaultAsync(bn => bn.MaBenhNhan == id);
 
                 if (benhNhan == null)
@@ -281,28 +267,81 @@ namespace WebApplication1.Controllers
                     return NotFound();
                 }
 
+                // Thay vì xóa, cập nhật trạng thái Active
                 if (benhNhan.Nguoi != null)
                 {
-                    _dbService.Nguois.Remove(benhNhan.Nguoi);
+                    // Cập nhật Active cho người
+                    benhNhan.Active = false;
+
+                    // Cập nhật Active cho tỉnh thành nếu cần
+                    if (benhNhan.Nguoi.TinhThanh != null)
+                    {
+                        benhNhan.Nguoi.TinhThanh.Active = false;
+                    }
                 }
 
-                _dbService.BenhNhans.Remove(benhNhan);
+                // Cập nhật Active cho bệnh nhân
+                benhNhan.Active = false;
+
                 await _dbService.SaveChangesAsync();
 
-                // Giữ nguyên trang hiện tại khi redirect
+                TempData["SuccessMessage"] = "Đã vô hiệu hóa bệnh nhân thành công!";
+
                 return RedirectToAction("DanhSach", new
                 {
                     page = currentPage > 0 ? currentPage : 1,
                     pageSize = pageSize > 0 ? pageSize : 5,
-                    decimalFormat = TempData["DecimalFormat"] // Giữ nguyên định dạng số
+                    decimalFormat = TempData["DecimalFormat"]
                 });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi xóa bệnh nhân");
-                return Json(new { success = false, message = "Có lỗi xảy ra khi xóa bệnh nhân" });
+                _logger.LogError(ex, "Lỗi khi vô hiệu hóa bệnh nhân");
+                TempData["ErrorMessage"] = "Có lỗi xảy ra khi vô hiệu hóa bệnh nhân";
+                return RedirectToAction("DanhSach", new
+                {
+                    page = currentPage > 0 ? currentPage : 1,
+                    pageSize = pageSize > 0 ? pageSize : 5
+                });
             }
         }
+        // Xóa bệnh nhân khỏi db
+        //[HttpPost]
+        //public async Task<IActionResult> Delete(string id, int currentPage = 1, int pageSize = 5)
+        //{
+        //    try
+        //    {
+        //        var benhNhan = await _dbService.BenhNhans
+        //            .Include(bn => bn.Nguoi)
+        //            .FirstOrDefaultAsync(bn => bn.MaBenhNhan == id);
+
+        //        if (benhNhan == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        if (benhNhan.Nguoi != null)
+        //        {
+        //            _dbService.Nguois.Remove(benhNhan.Nguoi);
+        //        }
+
+        //        _dbService.BenhNhans.Remove(benhNhan);
+        //        await _dbService.SaveChangesAsync();
+
+        //        // Giữ nguyên trang hiện tại khi redirect
+        //        return RedirectToAction("DanhSach", new
+        //        {
+        //            page = currentPage > 0 ? currentPage : 1,
+        //            pageSize = pageSize > 0 ? pageSize : 5,
+        //            decimalFormat = TempData["DecimalFormat"] // Giữ nguyên định dạng số
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi khi xóa bệnh nhân");
+        //        return Json(new { success = false, message = "Có lỗi xảy ra khi xóa bệnh nhân" });
+        //    }
+        //}
 
 
         //Đang query trực tiếp qua Entity Framework (EF Core) với .Include() và .ThenInclude()
@@ -529,151 +568,7 @@ namespace WebApplication1.Controllers
                 }
             }
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Add(BenhNhan model, int currentPage)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            // Xử lý Tỉnh/Thành
-        //            if (!string.IsNullOrEmpty(model.Nguoi.TinhThanh?.MaTinh))
-        //            {
-        //                // Kiểm tra tỉnh đã tồn tại chưa
-        //                var existingTinhThanh = await _dbService.TinhThanhs
-        //                    .FirstOrDefaultAsync(tt => tt.MaTinh == model.Nguoi.TinhThanh.MaTinh);
-
-        //                if (existingTinhThanh == null)
-        //                {
-        //                    // Tạo mới TinhThanh từ dữ liệu form
-        //                    var newTinhThanh = new TinhThanh
-        //                    {
-        //                        MaTinh = model.Nguoi.TinhThanh.MaTinh,
-        //                        TenTinh = model.Nguoi.TinhThanh.TenTinh,
-        //                        VietTat = model.Nguoi.TinhThanh.VietTat
-        //                    };
-
-        //                    await _dbService.TinhThanhs.AddAsync(newTinhThanh);
-        //                    await _dbService.SaveChangesAsync();
-
-        //                    model.Nguoi.TinhThanhId = newTinhThanh.Id;
-        //                }
-        //                else
-        //                {
-        //                    model.Nguoi.TinhThanhId = existingTinhThanh.Id;
-        //                }
-
-        //                // Đảm bảo không lưu đối tượng TinhThanh mới qua navigation property
-        //                model.Nguoi.TinhThanh = null;
-        //            }
-
-        //            // Tiếp tục xử lý lưu bệnh nhân...
-        //            await _dbService.Nguois.AddAsync(model.Nguoi);
-        //            await _dbService.SaveChangesAsync();
-
-        //            model.MaNguoi = model.Nguoi.MaNguoi;
-        //            model.DonGia = 0;
-        //            await _dbService.BenhNhans.AddAsync(model);
-        //            await _dbService.SaveChangesAsync();
-
-        //            return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            _logger.LogError(ex, "Lỗi khi thêm bệnh nhân.");
-        //            return Json(new { success = false, errors = new { Global = "Lỗi khi thêm bệnh nhân: " + ex.Message } });
-        //        }
-        //    }
-
-        //    var errorList = ModelState.ToDictionary(
-        //        kvp => kvp.Key,
-        //        kvp => kvp.Value.Errors.First().ErrorMessage
-        //    );
-        //    return Json(new { success = false, errors = errorList });
-        //}
-        //[HttpPost("BenhNhan/Edit/{MaBenhNhan}")]
-        //public async Task<IActionResult> Edit(string MaBenhNhan, BenhNhan model, int currentPage = 1, int pageSize = 5)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ViewBag.DanTocList = await _dbService.DanTocs.ToListAsync();
-        //        return View(model);
-        //    }
-
-        //    var existingBenhNhan = await _dbService.BenhNhans
-        //        .Include(bn => bn.Nguoi)
-        //        .FirstOrDefaultAsync(bn => bn.MaBenhNhan == MaBenhNhan);
-
-        //    if (existingBenhNhan == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Xử lý Tỉnh/Thành - Tạo mới nếu không tồn tại
-        //    if (!string.IsNullOrEmpty(model.Nguoi.TinhThanh?.MaTinh))
-        //    {
-        //        // Kiểm tra theo MaTinh (khóa duy nhất)
-        //        var existingTinhThanh = await _dbService.TinhThanhs
-        //            .FirstOrDefaultAsync(tt => tt.MaTinh == model.Nguoi.TinhThanh.MaTinh);
-
-        //        if (existingTinhThanh == null)
-        //        {
-        //            // Tạo mới Tỉnh/Thành
-        //            var newTinhThanh = new TinhThanh
-        //            {
-        //                MaTinh = model.Nguoi.TinhThanh.MaTinh,
-        //                TenTinh = model.Nguoi.TinhThanh.TenTinh,
-        //                VietTat = model.Nguoi.TinhThanh.VietTat
-        //            };
-
-        //            // Bắt đầu transaction để đảm bảo toàn vẹn dữ liệu
-        //            using var transaction = await _dbService.Database.BeginTransactionAsync();
-
-        //            try
-        //            {
-        //                await _dbService.TinhThanhs.AddAsync(newTinhThanh);
-        //                await _dbService.SaveChangesAsync(); // Lưu để có ID
-
-        //                existingBenhNhan.Nguoi.TinhThanhId = newTinhThanh.Id;
-
-        //                // Cập nhật thông tin khác
-        //                UpdateBenhNhanInfo(existingBenhNhan, model);
-
-        //                await _dbService.SaveChangesAsync();
-        //                await transaction.CommitAsync();
-        //            }
-        //            catch (DbUpdateException ex)
-        //            {
-        //                await transaction.RollbackAsync();
-        //                _logger.LogError(ex, "Lỗi khi tạo mới Tỉnh/Thành");
-        //                ModelState.AddModelError("", "Lỗi khi lưu Tỉnh/Thành mới");
-        //                ViewBag.DanTocList = await _dbService.DanTocs.ToListAsync();
-        //                return View(model);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            // Nếu đã tồn tại, gán ID
-        //            existingBenhNhan.Nguoi.TinhThanhId = existingTinhThanh.Id;
-        //            UpdateBenhNhanInfo(existingBenhNhan, model);
-        //            await _dbService.SaveChangesAsync();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Nếu không có Tỉnh/Thành được chọn
-        //        existingBenhNhan.Nguoi.TinhThanhId = null;
-        //        UpdateBenhNhanInfo(existingBenhNhan, model);
-        //        await _dbService.SaveChangesAsync();
-        //    }
-
-        //    return RedirectToAction("DanhSach", new
-        //    {
-        //        page = currentPage > 0 ? currentPage : 1,
-        //        pageSize = pageSize > 0 ? pageSize : 5
-        //    });
-        //}
-
+        
     }
 }
 
