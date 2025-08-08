@@ -203,66 +203,74 @@ $(document).ready(function () {
 
 
 //function initAutoCalculation() {
-  
-//    function formatNumber(inputElement, num) {
+//    // Hàm định dạng số cải tiến
+//    function formatNumber(inputElement, rawValue) {
 //        if ($('#allowDecimal').is(':checked')) return;
 
-//        const rawValue = inputElement.value;
 //        const cursorPos = inputElement.selectionStart;
+//        const raw = inputElement.value;
 
-//        // Xóa dấu chấm cũ và đếm số chữ số trước con trỏ
-//        const rawWithoutDots = rawValue.replace(/\./g, '');
-//        let digitsBeforeCursor = 0;
+//        // Đếm số chữ số trước con trỏ (bỏ qua dấu chấm)
+//        let digitBeforeCursor = 0;
 //        for (let i = 0; i < cursorPos; i++) {
-//            if (/\d/.test(rawWithoutDots[i] ?? '')) digitsBeforeCursor++;
+//            if (/\d/.test(raw[i])) digitBeforeCursor++;
 //        }
 
-//        // Làm sạch và định dạng lại
-//        num = num.toString().replace(/\./g, '').replace(/,/g, '');
-//        const formatted = isNaN(num) ? '0' : parseInt(num).toLocaleString('vi-VN');
+//        // Làm sạch chuỗi
+//        const cleaned = rawValue.toString().replace(/\D/g, '');
+
+//        // Định dạng lại số
+//        const formatted = cleaned === '' ? '' : parseInt(cleaned).toLocaleString('vi-VN');
 //        inputElement.value = formatted;
 
-//        // Tính lại vị trí con trỏ dựa trên số chữ số trước đó
+//        // Xác định vị trí con trỏ mới theo số chữ số trước đó
 //        let newCursorPos = 0;
 //        let digitCount = 0;
 //        for (let i = 0; i < formatted.length; i++) {
 //            if (/\d/.test(formatted[i])) digitCount++;
-//            if (digitCount >= digitsBeforeCursor) {
+//            if (digitCount >= digitBeforeCursor) {
 //                newCursorPos = i + 1;
 //                break;
 //            }
 //        }
 
-//        // Cập nhật lại vị trí con trỏ
 //        inputElement.setSelectionRange(newCursorPos, newCursorPos);
 //    }
 
+
+//    // Hàm parse số giữ nguyên
 //    function parseNumber(str) {
 //        if ($('#allowDecimal').is(':checked')) {
-//            // Cho phép dấu , => đổi thành . để parseFloat hoạt động
 //            const normalized = str.toString().replace(/\./g, '').replace(',', '.');
 //            return parseFloat(normalized) || 0;
-//        } else {
-//            return parseInt(str.toString().replace(/\./g, '')) || 0;
 //        }
+//        return parseInt(str.toString().replace(/\D/g, '')) || 0;
 //    }
 
-//    $('#DonGia').off('input change').on('input change', function () {
+//    // Xử lý sự kiện input
+//    $('#DonGia').off('input').on('input', function () {
 //        const input = this;
 //        let raw = $(this).val();
 
-//        if (!$('#allowDecimal').is(':checked')) {
-//            raw = raw.replace(/[^\d]/g, '');
+//        if ($('#allowDecimal').is(':checked')) {
+//            // Chế độ thập phân: cho phép số và 1 dấu phẩy
+//            raw = raw.replace(/[^\d,]/g, '');
+//            const commaCount = (raw.match(/,/g) || []).length;
+//            if (commaCount > 1) {
+//                raw = raw.replace(/,/g, '').replace(/^(\d*)(\d{0,2})$/, '$1,$2');
+//            }
+//            $(this).val(raw);
 //        } else {
-//            // Chỉ cho phép số và dấu ,
-//            raw = raw.replace(/[^0-9,]/g, '');
+//            // Chế độ nguyên: chỉ số
+//            raw = raw.replace(/\D/g, '');
+//            //$(this).val(raw);
+//            formatNumber(input, raw);
 //        }
 
-//        $(this).val(raw);
-//        formatNumber(input, raw);
 //        calculateAll();
 //    });
 
+//    // Các hàm khác giữ nguyên...
 //    function calculateAll() {
 //        const soNgay = parseInt($('#SoNgayNhapVien').val()) || 0;
 //        const donGia = parseNumber($('#DonGia').val());
@@ -300,44 +308,35 @@ $(document).ready(function () {
 //    // Tính toán ngay khi load
 //    calculateAll();
 //}
-
 function initAutoCalculation() {
-    // Hàm định dạng số cải tiến
-    function formatNumber(inputElement, rawValue) {
+    // Kiểm tra định dạng ban đầu từ server
+    const isDecimalFromServer = @(Model.DonGia % 1 != 0 ? "true" : "false");
+    $('#allowDecimal').prop('checked', isDecimalFromServer);
+
+    // Hàm định dạng số
+    function formatNumber(inputElement, num) {
         if ($('#allowDecimal').is(':checked')) return;
 
-        const cursorPos = inputElement.selectionStart;
-        const raw = inputElement.value;
+        const startPos = inputElement.selectionStart;
+        const originalValue = inputElement.value;
+        const prefix = originalValue.substring(0, startPos).replace(/\D/g, '');
 
-        // Đếm số chữ số trước con trỏ (bỏ qua dấu chấm)
-        let digitBeforeCursor = 0;
-        for (let i = 0; i < cursorPos; i++) {
-            if (/\d/.test(raw[i])) digitBeforeCursor++;
-        }
-
-        // Làm sạch chuỗi
-        const cleaned = rawValue.toString().replace(/\D/g, '');
-
-        // Định dạng lại số
-        const formatted = cleaned === '' ? '' : parseInt(cleaned).toLocaleString('vi-VN');
+        const cleaned = num.toString().replace(/\D/g, '');
+        const numberValue = cleaned === '' ? 0 : parseInt(cleaned);
+        const formatted = numberValue.toLocaleString('vi-VN');
         inputElement.value = formatted;
 
-        // Xác định vị trí con trỏ mới theo số chữ số trước đó
-        let newCursorPos = 0;
+        // Tính vị trí con trỏ mới
+        let newPos = 0;
         let digitCount = 0;
-        for (let i = 0; i < formatted.length; i++) {
+        for (let i = 0; i < formatted.length && digitCount < prefix.length; i++) {
             if (/\d/.test(formatted[i])) digitCount++;
-            if (digitCount >= digitBeforeCursor) {
-                newCursorPos = i + 1;
-                break;
-            }
+            newPos = i + 1;
         }
-
-        inputElement.setSelectionRange(newCursorPos, newCursorPos);
+        inputElement.setSelectionRange(newPos, newPos);
     }
 
-
-    // Hàm parse số giữ nguyên
+    // Hàm parse số
     function parseNumber(str) {
         if ($('#allowDecimal').is(':checked')) {
             const normalized = str.toString().replace(/\./g, '').replace(',', '.');
@@ -347,12 +346,11 @@ function initAutoCalculation() {
     }
 
     // Xử lý sự kiện input
-    $('#DonGia').off('input').on('input', function () {
+    $('#DonGia').on('input', function () {
         const input = this;
         let raw = $(this).val();
 
         if ($('#allowDecimal').is(':checked')) {
-            // Chế độ thập phân: cho phép số và 1 dấu phẩy
             raw = raw.replace(/[^\d,]/g, '');
             const commaCount = (raw.match(/,/g) || []).length;
             if (commaCount > 1) {
@@ -360,54 +358,60 @@ function initAutoCalculation() {
             }
             $(this).val(raw);
         } else {
-            // Chế độ nguyên: chỉ số
             raw = raw.replace(/\D/g, '');
-            //$(this).val(raw);
             formatNumber(input, raw);
         }
 
         calculateAll();
     });
 
-    // Các hàm khác giữ nguyên...
+    // Tính toán tổng tiền
     function calculateAll() {
         const soNgay = parseInt($('#SoNgayNhapVien').val()) || 0;
         const donGia = parseNumber($('#DonGia').val());
         const tongTien = soNgay * donGia;
 
-        $('#TongTien').val(tongTien.toLocaleString('vi-VN'));
+        if ($('#allowDecimal').is(':checked')) {
+            $('#TongTien').val(tongTien.toFixed(2).replace('.', ','));
+        } else {
+            $('#TongTien').val(tongTien.toLocaleString('vi-VN'));
+        }
         $('#TongTienRaw').val(tongTien);
     }
 
-    // Cập nhật lại khi thay đổi checkbox
-    $('#allowDecimal').off('change').on('change', function () {
-        $('#DonGia').val('');
-        $('#TongTien').val('');
-        $('#TongTienRaw').val('');
-    });
+    // Xử lý thay đổi checkbox
+    $('#allowDecimal').change(function () {
+        const isDecimal = $(this).is(':checked');
+        localStorage.setItem('allowDecimal', isDecimal);
 
-    // Gắn sự kiện thay đổi ngày
-    $('#ngayNhapVien, #ngayXuatVien').off('change').on('change', function () {
-        const nhapVien = $('#ngayNhapVien').val();
-        const xuatVien = $('#ngayXuatVien').val();
+        const currentValue = $('#DonGia').val();
+        if (!currentValue) return;
 
-        if (nhapVien && xuatVien) {
-            const date1 = new Date(nhapVien.split(' ')[0].split('-').reverse().join('-'));
-            const date2 = new Date(xuatVien.split(' ')[0].split('-').reverse().join('-'));
-            const diffDays = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24)) + 1;
+        const numberValue = parseNumber(currentValue);
 
-            $('#SoNgayNhapVien').val(diffDays > 0 ? diffDays : '');
+        if (isDecimal) {
+            $('#DonGia').val(numberValue.toFixed(2).replace('.', ','));
         } else {
-            $('#SoNgayNhapVien').val('');
+            $('#DonGia').val(numberValue.toLocaleString('vi-VN'));
         }
 
         calculateAll();
     });
 
-    // Tính toán ngay khi load
-    calculateAll();
+    // Khởi tạo khi load trang
+    $(document).ready(function () {
+        // Đồng bộ giá trị ban đầu
+        const initialValue = $('#DonGia').val();
+        if (initialValue) {
+            if ($('#allowDecimal').is(':checked')) {
+                $('#DonGia').val(parseNumber(initialValue).toFixed(2).replace('.', ','));
+            } else {
+                formatNumber(document.getElementById('DonGia'), initialValue);
+            }
+        }
+        calculateAll();
+    });
 }
-
 $(document).ready(function () {
     $('#danTocId').select2({
         theme: 'bootstrap-5',

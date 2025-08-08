@@ -110,39 +110,64 @@ namespace WebApplication1.Controllers
             return Json(new { success = false, errors = errorList });
         }
 
+        //[HttpGet("BenhNhan/Edit/{MaBenhNhan}")]
+        //public async Task<IActionResult> Edit(string MaBenhNhan)
+        //{
+        //    try
+        //    {
+        //var benhNhan = await _dbService.BenhNhans
+        //    .Include(b => b.Nguoi)
+        //    .ThenInclude(n => n.DanToc)
+        //    .Include(b => b.Nguoi)
+        //    .ThenInclude(n => n.TinhThanh)
+        //    .FirstOrDefaultAsync(b => b.MaBenhNhan == MaBenhNhan);
+
+        //        if (benhNhan == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        // Kiểm tra null và khởi tạo danh sách rỗng nếu cần
+        //        var danTocList = await _dbService?.DanTocs?.ToListAsync() ?? new List<DanToc>();
+        //        ViewBag.DanTocList = danTocList;
+        //        return View(benhNhan);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Ghi log lỗi
+        //        _logger.LogError(ex, "Lỗi khi tải trang chỉnh sửa bệnh nhân");
+
+        //        // Trả về trang lỗi
+        //        return StatusCode(500, "Đã xảy ra lỗi khi tải dữ liệu");
+        //    }
+        //}
         [HttpGet("BenhNhan/Edit/{MaBenhNhan}")]
         public async Task<IActionResult> Edit(string MaBenhNhan)
         {
             try
             {
                 var benhNhan = await _dbService.BenhNhans
-                    .Include(b => b.Nguoi)
-                    .ThenInclude(n => n.DanToc)
-                    .Include(b => b.Nguoi)
-                    .ThenInclude(n => n.TinhThanh)
-                    .FirstOrDefaultAsync(b => b.MaBenhNhan == MaBenhNhan);
+    .Include(b => b.Nguoi)
+    .ThenInclude(n => n.DanToc)
+    .Include(b => b.Nguoi)
+    .ThenInclude(n => n.TinhThanh)
+    .FirstOrDefaultAsync(b => b.MaBenhNhan == MaBenhNhan);
 
-                if (benhNhan == null)
-                {
-                    return NotFound();
-                }
+                if (benhNhan == null) return NotFound();
 
-                // Kiểm tra null và khởi tạo danh sách rỗng nếu cần
-                var danTocList = await _dbService?.DanTocs?.ToListAsync() ?? new List<DanToc>();
+                var danTocList = await _dbService.DanTocs.ToListAsync();
                 ViewBag.DanTocList = danTocList;
 
+                // Thêm logic xác định kiểu định dạng
+                ViewBag.IsDecimal = benhNhan.DonGia % 1 != 0; // Kiểm tra có phần thập phân không
                 return View(benhNhan);
             }
             catch (Exception ex)
             {
-                // Ghi log lỗi
                 _logger.LogError(ex, "Lỗi khi tải trang chỉnh sửa bệnh nhân");
-
-                // Trả về trang lỗi
-                return StatusCode(500, "Đã xảy ra lỗi khi tải dữ liệu");
+                return StatusCode(500);
             }
         }
-
         [HttpPost("BenhNhan/Edit/{MaBenhNhan}")]
         public async Task<IActionResult> Edit(string MaBenhNhan, BenhNhan model, int currentPage = 1, int pageSize = 5)
         {
@@ -273,7 +298,7 @@ namespace WebApplication1.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(string id, int currentPage)
+        public async Task<IActionResult> Delete(string id, int currentPage =1, int pageSize = 5)
         {
             try
             {
@@ -295,7 +320,12 @@ namespace WebApplication1.Controllers
                 await _dbService.SaveChangesAsync();
 
                 // Giữ nguyên trang hiện tại khi redirect
-                return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
+                return RedirectToAction("DanhSach", new
+                {
+                    page = currentPage > 0 ? currentPage : 1,
+                    pageSize = pageSize > 0 ? pageSize : 5,
+                    decimalFormat = TempData["DecimalFormat"] // Giữ nguyên định dạng số
+                });
             }
             catch (Exception ex)
             {
@@ -343,6 +373,9 @@ namespace WebApplication1.Controllers
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
+
+            // Lưu giá trị decimalFormat vào TempData để sử dụng khi redirect
+            TempData["DecimalFormat"] = decimalFormat;
 
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
