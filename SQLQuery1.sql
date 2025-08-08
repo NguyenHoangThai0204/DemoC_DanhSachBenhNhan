@@ -61,6 +61,9 @@ ALTER COLUMN TongTien decimal(22,2) NULL;
 
 select * from TinhThanh
 
+delete from TinhThanh
+where MaTinh = 'HB'
+
 ALTER TABLE BenhNhan
 ADD DonGia decimal(18,2) NULL;
 
@@ -224,3 +227,33 @@ select * from BenhNhan
 
 ALTER AUTHORIZATION ON DATABASE::phongkhamdakhoa TO [LAPTOP-QIG4MMTG\Asus];
 
+
+
+
+/* dạng nâng cao của xuất danh sách dùng STO*/
+CREATE PROCEDURE sp_GetBenhNhanPaged
+    @PageNumber INT,
+    @PageSize INT
+AS
+BEGIN
+SELECT 
+    b.MaBenhNhan, 
+    n.HoTen, 
+    n.GioiTinh, 
+    d.TenDanToc,     -- ✅ Hiển thị tên dân tộc thay vì ID
+    b.NgayNhapVien, 
+    b.NgayXuatVien,
+    b.DonGia,
+    t.TenTinh,       -- ✅ Hiển thị tên tỉnh
+    b.SoNgayNhapVien,
+    b.TongTien
+FROM BenhNhan b
+JOIN Nguoi n ON b.MaNguoi = n.MaNguoi
+LEFT JOIN DanToc d ON n.DanTocId = d.Id
+LEFT JOIN TinhThanh t ON n.TinhThanhId = t.Id
+    ORDER BY  n.HoTen DESC
+    OFFSET (@PageNumber - 1) * @PageSize ROWS
+    FETCH NEXT @PageSize ROWS ONLY
+END
+
+DROP PROCEDURE sp_GetBenhNhanPaged;

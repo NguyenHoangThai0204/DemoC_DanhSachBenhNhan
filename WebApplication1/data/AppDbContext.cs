@@ -11,12 +11,14 @@ namespace WebApplication1.Data
         public DbSet<BenhNhan> BenhNhans { get; set; }
         public DbSet<DanToc> DanTocs { get; set; }
         public DbSet<TinhThanh> TinhThanhs { get; set; }
+        public DbSet<BenhNhanSTO> BenhNhanSTOs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Nguoi>().ToTable("Nguoi");
             modelBuilder.Entity<BenhNhan>().ToTable("BenhNhan");
             modelBuilder.Entity<DanToc>().ToTable("DanToc");
+            modelBuilder.Entity<BenhNhanSTO>().HasNoKey();
             modelBuilder.Entity<TinhThanh>()
     .Property(tt => tt.VietTat)
     .HasColumnType("nvarchar(max)");

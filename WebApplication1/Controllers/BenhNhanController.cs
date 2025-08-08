@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.InkML;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using QuestPDF.Fluent;
@@ -303,30 +304,8 @@ namespace WebApplication1.Controllers
             }
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> DanhSach(int page = 1, int pageSize = 5)
-        //{
-        //    var totalItems = await _dbService.BenhNhans.CountAsync();
-        //    var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
-        //    // Đảm bảo page không vượt quá totalPages
-        //    page = Math.Max(1, Math.Min(page, totalPages));
-
-        //    var danhSach = await _dbService.BenhNhans
-        //    .Include(bn => bn.Nguoi)
-        //        .ThenInclude(n => n.DanToc) // Load DanToc
-        //    .Include(bn => bn.Nguoi)        // Bắt đầu lại từ Nguoi
-        //        .ThenInclude(n => n.TinhThanh) // Load TinhThanh
-        //    .Skip((page - 1) * pageSize)
-        //    .Take(pageSize)
-        //    .ToListAsync();
-
-        //    ViewBag.CurrentPage = page;
-        //    ViewBag.TotalPages = totalPages;
-        //    ViewBag.PageSize = pageSize;
-
-        //    return View(danhSach);
-        //}
+        //Đang query trực tiếp qua Entity Framework (EF Core) với .Include() và .ThenInclude()
         [HttpGet]
         public async Task<IActionResult> DanhSach(int page = 1, int pageSize = 5, bool decimalFormat = false)
         {
@@ -334,13 +313,21 @@ namespace WebApplication1.Controllers
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
             page = Math.Max(1, Math.Min(page, totalPages));
 
-            var danhSach = await _dbService.BenhNhans
-                .Include(bn => bn.Nguoi)
-                .ThenInclude(n => n.DanToc)
-                .Include(bn => bn.Nguoi)
-                .ThenInclude(n => n.TinhThanh)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
+            // đang dùng dạng entity framework
+            //var danhSach = await _dbService.BenhNhans
+            //    .Include(bn => bn.Nguoi)
+            //    .ThenInclude(n => n.DanToc)
+            //    .Include(bn => bn.Nguoi)
+            //    .ThenInclude(n => n.TinhThanh)
+            //    .Skip((page - 1) * pageSize)
+            //    .Take(pageSize)
+            //    .ToListAsync();
+
+            // Sử dụng stored procedure để lấy danh sách bệnh nhân
+            var danhSach = await _dbService.BenhNhanSTOs
+                .FromSqlRaw("EXEC sp_GetBenhNhanPaged @PageNumber, @PageSize",
+                new SqlParameter("@PageNumber", page),
+                new SqlParameter("@PageSize", pageSize))
                 .ToListAsync();
 
             // Lưu giá trị decimalFormat vào TempData để sử dụng khi redirect
@@ -410,13 +397,20 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var data = await _dbService.BenhNhans
-                    .Include(b => b.Nguoi)
-                        .ThenInclude(n => n.DanToc)
-                    .Include(b => b.Nguoi)
-                        .ThenInclude(n => n.TinhThanh)
-                    .AsNoTracking()
-                    .ToListAsync();
+                // Sử dụng entity để lấy danh sách bệnh nhân
+                //var data = await _dbService.BenhNhans
+                //    .Include(b => b.Nguoi)
+                //        .ThenInclude(n => n.DanToc)
+                //    .Include(b => b.Nguoi)
+                //        .ThenInclude(n => n.TinhThanh)
+                //    .AsNoTracking()
+                //    .ToListAsync();
+
+                // Sử dụng stored procedure để lấy danh sách bệnh nhân
+                var data = await _dbService.BenhNhanSTOs
+                      .FromSqlRaw("EXEC sp_GetBenhNhan") // <-- Đổi tên proc nếu cần
+                      .AsNoTracking()
+                      .ToListAsync();
 
                 if (data == null || !data.Any())
                 {
@@ -437,14 +431,24 @@ namespace WebApplication1.Controllers
             }
         }
 
+        //[HttpGet]
+        //public IActionResult ExportToExcel()
         [HttpGet]
-        public IActionResult ExportToExcel()
+        public async Task<IActionResult> ExportToExcel()
         {
-            var data = _dbService.BenhNhans
-                .Include(b => b.Nguoi)
-                .Include(b => b.Nguoi.DanToc)
-                .Include(b => b.Nguoi.TinhThanh)
-                .ToList();
+            // Sử dụng entity để lấy danh sách bệnh nhân
+            //var data = _dbService.BenhNhans
+            //    .Include(b => b.Nguoi)
+            //    .Include(b => b.Nguoi.DanToc)
+            //    .Include(b => b.Nguoi.TinhThanh)
+            //    .ToList();
+
+
+            // Sử dụng stored procedure để lấy danh sách bệnh nhân
+            var data = await _dbService.BenhNhanSTOs
+          .FromSqlRaw("EXEC sp_GetBenhNhan") // <-- Đổi tên proc nếu cần
+          .AsNoTracking()
+          .ToListAsync();
 
             using (var workbook = new XLWorkbook())
             {
@@ -471,11 +475,11 @@ namespace WebApplication1.Controllers
                 {
                     worksheet.Cell(row, 1).Value = stt++;
                     worksheet.Cell(row, 2).Value = bn.MaBenhNhan;
-                    worksheet.Cell(row, 3).Value = bn.Nguoi?.HoTen;
-                    worksheet.Cell(row, 4).Value = bn.Nguoi?.NgaySinh?.ToString("dd-MM-yyyy");
-                    worksheet.Cell(row, 5).Value = bn.Nguoi?.GioiTinh;
-                    worksheet.Cell(row, 6).Value = bn.Nguoi?.DanToc?.TenDanToc;
-                    worksheet.Cell(row, 7).Value = bn.Nguoi?.TinhThanh?.TenTinh;
+                    worksheet.Cell(row, 3).Value = bn.HoTen;
+                    worksheet.Cell(row, 4).Value = bn.NgaySinh?.ToString("dd-MM-yyyy");
+                    worksheet.Cell(row, 5).Value = bn.GioiTinh;
+                    worksheet.Cell(row, 6).Value = bn.TenDanToc;
+                    worksheet.Cell(row, 7).Value = bn.TenTinh;
                     worksheet.Cell(row, 8).Value = bn.NgayNhapVien.ToString("dd-MM-yyyy HH:mm");
                     worksheet.Cell(row, 9).Value = bn.NgayXuatVien?.ToString("dd-MM-yyyy");
                     worksheet.Cell(row, 10).Value = bn.SoNgayNhapVien;
@@ -490,6 +494,29 @@ namespace WebApplication1.Controllers
                     worksheet.Cell(row, 12).Style.NumberFormat.Format = "#,##0.00"; // Cũng 2 chữ số thập phân
                     row++;
                 }
+                //foreach (var bn in data)
+                //{
+                //    worksheet.Cell(row, 1).Value = stt++;
+                //    worksheet.Cell(row, 2).Value = bn.MaBenhNhan;
+                //    worksheet.Cell(row, 3).Value = bn.HoTen;
+                //    worksheet.Cell(row, 4).Value = bn.Nguoi?.NgaySinh?.ToString("dd-MM-yyyy");
+                //    worksheet.Cell(row, 5).Value = bn.Nguoi?.GioiTinh;
+                //    worksheet.Cell(row, 6).Value = bn.Nguoi?.DanToc?.TenDanToc;
+                //    worksheet.Cell(row, 7).Value = bn.Nguoi?.TinhThanh?.TenTinh;
+                //    worksheet.Cell(row, 8).Value = bn.NgayNhapVien.ToString("dd-MM-yyyy HH:mm");
+                //    worksheet.Cell(row, 9).Value = bn.NgayXuatVien?.ToString("dd-MM-yyyy");
+                //    worksheet.Cell(row, 10).Value = bn.SoNgayNhapVien;
+                //    // 🟡 Định dạng tiền tệ theo kiểu "1.500.000"
+                //    decimal donGia = bn.DonGia ?? 0;
+                //    decimal tongTien = bn.TongTien ?? 0;
+
+                //    worksheet.Cell(row, 11).Value = donGia;
+                //    worksheet.Cell(row, 11).Style.NumberFormat.Format = "#,##0.00"; // Hiển thị 2 chữ số thập phân
+
+                //    worksheet.Cell(row, 12).Value = tongTien;
+                //    worksheet.Cell(row, 12).Style.NumberFormat.Format = "#,##0.00"; // Cũng 2 chữ số thập phân
+                //    row++;
+                //}
 
                 using (var stream = new MemoryStream())
                 {

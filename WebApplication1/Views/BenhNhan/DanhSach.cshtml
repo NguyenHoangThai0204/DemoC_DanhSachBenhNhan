@@ -1,4 +1,5 @@
-﻿@model List<WebApplication1.Models.BenhNhan>
+﻿@* @model List<WebApplication1.Models.BenhNhan>  *@
+@model List<WebApplication1.Models.BenhNhanSTO>
 @using Newtonsoft.Json
 
 <h2>Danh sách bệnh nhân</h2>
@@ -112,7 +113,7 @@
 			}
 			@foreach (var bn in Model)
 			{
-				<tr>
+				@* <tr>
 					<td>@index</td>
 					<td>@bn.MaBenhNhan</td>
 					<td style="text-align:left;">@bn.Nguoi.HoTen</td>
@@ -143,15 +144,49 @@
 						</a>
 						<!-- Xóa -->
 
-				@* 		<form asp-action="Delete" asp-controller="BenhNhan"
+						<form asp-action="Delete" asp-controller="BenhNhan"
 							  asp-route-id="@bn.MaBenhNhan"
 							  asp-route-currentPage="@ViewBag.CurrentPage"
+							  asp-route-pageSize="@ViewBag.PageSize"
 							  method="post" style="display:inline;">
 							<button type="submit" class="btn btn-sm btn-danger" title="Xóa"
 									onclick="return confirm('Bạn có chắc muốn xóa?');">
 								<i class="bi bi-trash"></i>
 							</button>
-						</form> *@
+						</form>
+
+					</td>
+
+				</tr>*@
+				<tr> 
+					<td>@index</td>
+					<td>@bn.MaBenhNhan</td>
+					<td style="text-align:left;">@bn.HoTen</td>
+					<td>
+						@(bn.NgaySinh.HasValue? bn.NgaySinh.Value.ToString("dd-MM-yyyy") : "")
+					</td>
+					<td>@bn.GioiTinh</td>
+
+					<td style="text-align:left;">@(bn.TenDanToc ?? "Không rõ")</td>
+					<td style="text-align:left;">@(bn.TenTinh ?? "Không rõ")</td>
+					<td>@bn.NgayNhapVien.ToString("dd-MM-yyyy HH:mm")</td>
+					<td>@(bn.NgayXuatVien.HasValue? bn.NgayXuatVien.Value.ToString("dd-MM-yyyy") : "")</td>
+					<td class="tdTien">@bn.SoNgayNhapVien</td>
+					<td class="tdTien" data-format="currency">
+						@(ViewBag.DecimalFormat == true ? bn.DonGia?.ToString("N2") : bn.DonGia?.ToString("N0"))
+					</td>
+					<td class="tdTien" data-format="currency">
+						@(ViewBag.DecimalFormat == true ? bn.TongTien?.ToString("N2") : bn.TongTien?.ToString("N0"))
+					</td>
+					<td>
+
+						<a href="#" class="btn btn-sm btn-info"
+						   data-bs-toggle="modal"
+						   data-bs-target="#addBenhNhanModal"
+						   data-url="/BenhNhan/Edit/@bn.MaBenhNhan"
+						   title="Sửa">
+							<i class="bi bi-pencil-square"></i>
+						</a>
 						<form asp-action="Delete" asp-controller="BenhNhan"
 							  asp-route-id="@bn.MaBenhNhan"
 							  asp-route-currentPage="@ViewBag.CurrentPage"
@@ -166,6 +201,7 @@
 					</td>
 
 				</tr>
+				
 				index++;
 			}
 		</tbody>

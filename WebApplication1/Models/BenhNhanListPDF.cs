@@ -6,12 +6,17 @@ using System.Collections.Generic;
 using WebApplication1.Models;
 public class BenhNhanListPDF : IDocument
 {
-    private readonly List<BenhNhan> _data;
+    private readonly List<BenhNhanSTO> _data;
+    //private readonly List<BenhNhan> _data;
 
-    public BenhNhanListPDF(List<BenhNhan> data)
+    public BenhNhanListPDF(List<BenhNhanSTO> data)
     {
         _data = data;
     }
+    //public BenhNhanListPDF(List<BenhNhan> data)
+    //{
+    //    _data = data;
+    //}
 
     public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
     public void Compose(IDocumentContainer container)
@@ -184,11 +189,18 @@ public class BenhNhanListPDF : IDocument
         {
             table.Cell().Element(CellStyle).Text(stt++);
             table.Cell().Element(CellStyle).Text(bn.MaBenhNhan);
-            table.Cell().Element(CellStyle).Text(bn.Nguoi?.HoTen ?? "");
-            table.Cell().Element(CellStyle).Text(bn.Nguoi?.NgaySinh?.ToString("dd-MM-yyyy") ?? "");
-            table.Cell().Element(CellStyle).Text(bn.Nguoi?.GioiTinh ?? "");
+            table.Cell().Element(CellStyle).Text(bn.HoTen ?? "");
+            table.Cell().Element(CellStyle).Text(bn.NgaySinh?.ToString("dd-MM-yyyy") ?? "");
+            table.Cell().Element(CellStyle).Text(bn.GioiTinh ?? "");
             table.Cell().Element(CellStyle).Text(bn.NgayNhapVien.ToString("dd-MM-yyyy HH:mm"));
             table.Cell().Element(CellStyle).AlignRight().Text($"{(bn.TongTien ?? 0):N0}");
+            //table.Cell().Element(CellStyle).Text(stt++);
+            //table.Cell().Element(CellStyle).Text(bn.MaBenhNhan);
+            //table.Cell().Element(CellStyle).Text(bn.Nguoi?.HoTen ?? "");
+            //table.Cell().Element(CellStyle).Text(bn.Nguoi?.NgaySinh?.ToString("dd-MM-yyyy") ?? "");
+            //table.Cell().Element(CellStyle).Text(bn.Nguoi?.GioiTinh ?? "");
+            //table.Cell().Element(CellStyle).Text(bn.NgayNhapVien.ToString("dd-MM-yyyy HH:mm"));
+            //table.Cell().Element(CellStyle).AlignRight().Text($"{(bn.TongTien ?? 0):N0}");
         }
     });
 
