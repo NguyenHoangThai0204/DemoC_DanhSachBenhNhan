@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Microsoft.EntityFrameworkCore;
 using QuestPDF.Infrastructure;
 using System.Globalization;
 using System.Text.Encodings.Web;
@@ -19,9 +20,15 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();
+// Cấu hình Session (SỬA TỪ services -> builder.Services)
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
-// Add this to your services configuration
+// Cấu hình QuestPDF
 QuestPDF.Settings.License = LicenseType.Community;
 
 // Cấu hình CultureInfo cho ứng dụng
@@ -31,23 +38,23 @@ cultureInfo.DateTimeFormat.DateSeparator = "-";
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();  // Sử dụng Session middleware
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=BenhNhan}/{action=DanhSach}/{id?}");
 
 app.Run();

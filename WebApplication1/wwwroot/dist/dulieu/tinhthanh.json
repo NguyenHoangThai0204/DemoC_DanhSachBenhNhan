@@ -1,0 +1,187 @@
+﻿[
+  {
+    "MaTinh": "HNI",
+    "TenTinh": "Hà Nội",
+    "VietTat": [ "hanoi", "hn" ]
+  },
+  {
+    "MaTinh": "HCM",
+    "TenTinh": "Hồ Chí Minh",
+    "VietTat": [ "hochiminh", "hcm", "tphcm", "sg" ]
+  },
+  {
+    "MaTinh": "DN",
+    "TenTinh": "Đà Nẵng",
+    "VietTat": [ "danang", "dn" ]
+  },
+  {
+    "MaTinh": "BD",
+    "TenTinh": "Bình Dương",
+    "VietTat": [ "binhduong", "bd" ]
+  },
+  {
+    "MaTinh": "DNA",
+    "TenTinh": "Đồng Nai",
+    "VietTat": [ "dongnai", "dna" ]
+  },
+  {
+    "MaTinh": "HP",
+    "TenTinh": "Hải Phòng",
+    "VietTat": [ "haiphong", "hp" ]
+  },
+  {
+    "MaTinh": "CT",
+    "TenTinh": "Cần Thơ",
+    "VietTat": [ "cantho", "ct" ]
+  },
+  {
+    "MaTinh": "KH",
+    "TenTinh": "Khánh Hòa",
+    "VietTat": [ "khanhhoa", "kh" ]
+  },
+  {
+    "MaTinh": "QN",
+    "TenTinh": "Quảng Ninh",
+    "VietTat": [ "quangninh", "qn" ]
+  },
+  {
+    "MaTinh": "TH",
+    "TenTinh": "Thanh Hóa",
+    "VietTat": [ "thanhhoa", "th" ]
+  },
+  {
+    "MaTinh": "NA",
+    "TenTinh": "Nghệ An",
+    "VietTat": [ "nghean", "na" ]
+  },
+  {
+    "MaTinh": "HT",
+    "TenTinh": "Hà Tĩnh",
+    "VietTat": [ "hatinh", "ht" ]
+  },
+  {
+    "MaTinh": "QB",
+    "TenTinh": "Quảng Bình",
+    "VietTat": [ "quangbinh", "qb" ]
+  },
+  {
+    "MaTinh": "QT",
+    "TenTinh": "Quảng Trị",
+    "VietTat": [ "quangtri", "qt" ]
+  },
+  {
+    "MaTinh": "TT",
+    "TenTinh": "Thừa Thiên Huế",
+    "VietTat": [ "thuathienhue", "hue", "tt" ]
+  },
+  {
+    "MaTinh": "GL",
+    "TenTinh": "Gia Lai",
+    "VietTat": [ "gialai", "gl" ]
+  },
+  {
+    "MaTinh": "DL",
+    "TenTinh": "Đắk Lắk",
+    "VietTat": [ "daklak", "dl" ]
+  },
+  {
+    "MaTinh": "DKN",
+    "TenTinh": "Đắk Nông",
+    "VietTat": [ "daknong", "dkn" ]
+  },
+  {
+    "MaTinh": "LA",
+    "TenTinh": "Long An",
+    "VietTat": [ "longan", "la" ]
+  },
+  {
+    "MaTinh": "AG",
+    "TenTinh": "An Giang",
+    "VietTat": [ "angiang", "ag" ]
+  },
+  {
+    "MaTinh": "KG",
+    "TenTinh": "Kiên Giang",
+    "VietTat": [ "kiengiang", "kg" ]
+  },
+  {
+    "MaTinh": "CM",
+    "TenTinh": "Cà Mau",
+    "VietTat": [ "camau", "cm" ]
+  },
+  {
+    "MaTinh": "TG",
+    "TenTinh": "Tiền Giang",
+    "VietTat": [ "tiengiang", "tg" ]
+  },
+  {
+    "MaTinh": "VL",
+    "TenTinh": "Vĩnh Long",
+    "VietTat": [ "vinhlong", "vl" ]
+  },
+  {
+    "MaTinh": "TV",
+    "TenTinh": "Trà Vinh",
+    "VietTat": [ "travinh", "tv" ]
+  },
+  {
+    "MaTinh": "BL",
+    "TenTinh": "Bạc Liêu",
+    "VietTat": [ "baclieu", "bl" ]
+  },
+  {
+    "MaTinh": "ST",
+    "TenTinh": "Sóc Trăng",
+    "VietTat": [ "soctrang", "st" ]
+  },
+  {
+    "MaTinh": "PT",
+    "TenTinh": "Phú Thọ",
+    "VietTat": [ "phutho", "pt" ]
+  },
+  {
+    "MaTinh": "LC",
+    "TenTinh": "Lào Cai",
+    "VietTat": [ "laocai", "lc" ]
+  },
+  {
+    "MaTinh": "LS",
+    "TenTinh": "Lạng Sơn",
+    "VietTat": [ "langson", "ls" ]
+  },
+  {
+    "MaTinh": "BG",
+    "TenTinh": "Bắc Giang",
+    "VietTat": [ "bacgiang", "bg" ]
+  },
+  {
+    "MaTinh": "BN",
+    "TenTinh": "Bắc Ninh",
+    "VietTat": [ "bacninh", "bn" ]
+  },
+  {
+    "MaTinh": "TB",
+    "TenTinh": "Thái Bình",
+    "VietTat": [ "thaibinh", "tb" ]
+  },
+  {
+    "MaTinh": "HY",
+    "TenTinh": "Hưng Yên",
+    "VietTat": [ "hungyen", "hy" ]
+  },
+  {
+    "MaTinh": "ND",
+    "TenTinh": "Nam Định",
+    "VietTat": [ "namdinh", "nd" ]
+  },
+  {
+    "MaTinh": "NB",
+    "TenTinh": "Ninh Bình",
+    "VietTat": [ "ninhbinh", "nb" ]
+  },
+  {
+    "MaTinh": "HB",
+    "TenTinh": "Hòa Bình",
+    "VietTat": [ "hoabinh", "hb" ]
+  }
+]

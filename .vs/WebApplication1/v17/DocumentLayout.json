@@ -1,15 +1,93 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\ThucTap\\WebApplication1\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\views\\goikham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\goikham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\controllers\\goikhamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\goikhamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\benhnhan\\danhsach.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|d:\\thuctap\\webapplication1\\webapplication1\\modelstos\\goikhamsto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30A9F591-BF47-4D86-AD46-3AA8A4705764}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\modelstos\\goikhamsto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Asus\\.nuget\\packages\\epplus\\8.0.8\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 24,
-          "SelectedChildIndex": -1,
+          "DockedHeight": 13,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GoiKhamSTO.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\ModelSTOs\\GoiKhamSTO.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\ModelSTOs\\GoiKhamSTO.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\ModelSTOs\\GoiKhamSTO.cs",
+              "RelativeToolTip": "WebApplication1\\ModelSTOs\\GoiKhamSTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-10T06:14:14.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DanhSach.cshtml",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\BenhNhan\\DanhSach.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-09T18:15:17.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GoiKhamController.cs",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Controllers\\GoiKhamController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\GoiKhamController.cs",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Controllers\\GoiKhamController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\GoiKhamController.cs",
+              "ViewState": "AgIAALoAAAAAAAAAAAAowBgBAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-09T16:56:42.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\GoiKham\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\GoiKham\\Index.cshtml",
+              "ToolTip": "D:\\ThucTap\\WebApplication1\\WebApplication1\\Views\\GoiKham\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\GoiKham\\Index.cshtml",
+              "ViewState": "AgIAABAAAAAAAAAAAAAcwCMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-09T14:30:23.556Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 3,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +100,17 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\Asus\\.nuget\\packages\\epplus\\8.0.8\\readme.txt",
+              "ToolTip": "C:\\Users\\Asus\\.nuget\\packages\\epplus\\8.0.8\\readme.txt",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-08-10T06:37:48.311Z",
+              "EditorCaption": ""
             }
           ]
         }

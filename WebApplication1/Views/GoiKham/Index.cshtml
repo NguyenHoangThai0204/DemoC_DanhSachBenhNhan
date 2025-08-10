@@ -1,0 +1,174 @@
+﻿@model List<GoiKhamSTO>
+@using Newtonsoft.Json
+@using WebApplication1.ModelSTOs
+
+<style>
+	.table-wrapper {
+		max-height: 75vh;
+		-webkit-overflow-scrolling: touch;
+	}
+
+		.table-wrapper table {
+			border-collapse: separate; /* Thay đổi từ collapse sang separate */
+			border-spacing: 0; /* Xóa khoảng cách giữa các ô */
+			width: 100%;
+			table-layout: fixed;
+		}
+
+		/* Sửa lại phần sticky header */
+		.table-wrapper thead tr {
+			position: sticky;
+			top: 0;
+			z-index: 3; /* Tăng z-index */
+		}
+
+		.table-wrapper th {
+			background: #f2f2f2;
+			position: relative; /* Quan trọng */
+		}
+
+		.table-wrapper td {
+			padding: 6px;
+			text-align: center;
+			font-size: 1.4rem;
+		}
+
+		/* Border đặc biệt cho ô đầu tiên và cuối cùng */
+		.table-wrapper th:first-child {
+			border-left: 1px solid #ccc !important;
+		}
+
+		.table-wrapper th:last-child {
+			border-right: 1px solid #ccc !important;
+		}
+</style>
+
+<div class="container_goiKham">
+	<div class="container_goiKham left">
+		<div class="row">
+			<div style="width: 100%;">
+				<label class="form-label">Từ ngày</label>
+				<div class="input-group">
+					<input type="text"
+						   class="form-control date-input"
+						   id="ngayTuNgay"
+						   name="TuNgay"
+						   placeholder="dd-mm-yyyy"
+						   autocomplete="off" />
+					<span class="input-group-text cursor-pointer datepicker-trigger">
+						<i class="bi bi-calendar"></i>
+					</span>
+				</div>
+				<span class="text-danger"></span>
+			</div>
+			<div style="width: 100%; margin-bottom:8px;">
+				<label class="form-label">Đến ngày</label>
+				<div class="input-group">
+					<input type="text"
+						   class="form-control date-input"
+						   id="ngayDenNgay"
+						   name="DenNgay"
+						   placeholder="dd-mm-yyyy"
+						   autocomplete="off" />
+					<span class="input-group-text cursor-pointer datepicker-trigger">
+						<i class="bi bi-calendar"></i>
+					</span>
+				</div>
+				<span class="text-danger"></span>
+			</div>
+			<label>
+				<button id="btnFilter" class="btn btn-outline-primary mb-3" style="font-size: 1.2rem;">
+					<i class="bi bi-funnel"></i> Lọc danh sách
+				</button>
+			</label>
+		</div>
+		<div class="row">
+			<label>
+				<button id="btnExportPDFGoiKham" class="btn btn-outline-danger mb-3" style="font-size: 1.2rem;">
+					<i class="bi bi-file-earmark-pdf"></i> Xuất PDF
+				</button>
+			</label>
+		</div>
+		<div class="row">
+			<label>
+				<button id="btnExportExcelGoiKham" class="btn btn-outline-success mb-3" style="font-size: 1.2rem;">
+					<i class="bi bi-file-earmark-excel"></i> Xuất Excel
+				</button>
+			</label>
+		</div>
+		<div class="row">
+			<label>
+				<button id="btnUpload" class="btn btn-outline-primary mb-3" style="font-size: 1.2rem;">
+					<i class="bi bi-upload"></i> Tải danh sách lên
+				</button>
+			</label>
+		</div>
+	</div>
+	<div class="container_goiKham right">
+		<h2>BÁO CÁO THỰC HIỆN THEO DÕI GÓI KHÁM BỆNH</h2>
+		<div class="table-wrapper">
+			<table style="width:100%; table-layout: fixed;" cellpadding="8">
+				<thead>
+					<tr>
+						<th style="width: 3%">STT</th>
+						<th style="width: 7%">Mã y tế</th>
+						<th style="width: 12%">Họ và tên</th>
+						<th style="width: 14%">Gói khám</th>
+						<th style="width: 8%">Ngày đăng ký</th>
+						<th style="width: 10%">Trạng thái thực hiện</th>
+						<th style="width: 10%">Chỉ định còn lại</th>
+						<th style="width: 10%">Ghi chú</th>
+					</tr>
+				</thead>
+				<tbody>
+					@{
+						int index = ((ViewBag.CurrentPage ?? 1) - 1) * (ViewBag.PageSize ?? 5) + 1;
+					}
+					@foreach (var gk in Model)
+					{
+						<tr>
+							<td>@index</td>
+							<td>@gk.MaYTe</td>
+							<td style="text-align:left;">@gk.HoTen</td>
+							<td style="text-align:left;">@gk.GoiKham</td>
+							<td>@gk.NgayDangKy.ToString("dd-MM-yyyy")</td>
+							<td style="text-align:left;">@(gk.TrangThaiThucHien ?? "Không rõ")</td>
+							<td style="text-align:left;">@(gk.ChiDinhConLai ?? "Không rõ")</td>
+							<td style="text-align:left;">@(gk.GhiChu ?? "Không rõ")</td>
+						</tr>
+
+						index++;
+					}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+
+	<script src="~/dist/js/goikham/goiKham.js"></script>
+	<script>
+		
+		$(document).ready(function() {
+			// Hiển thị thông báo thành công
+			var successMessage = '@Html.Raw(TempData["SuccessMessage"] as string)';
+			if (successMessage) {
+				toastr.success(decodeHTMLEntities(successMessage));
+			}
+
+			// Hiển thị thông báo lỗi
+			var errorMessage = '@Html.Raw(TempData["ErrorMessage"] as string)';
+			if (errorMessage) {
+				toastr.error(decodeHTMLEntities(errorMessage));
+			}
+
+			function decodeHTMLEntities(text) {
+				var textArea = document.createElement('textarea');
+				textArea.innerHTML = text;
+				return textArea.value;
+			}
+		});
+	</script>
+}

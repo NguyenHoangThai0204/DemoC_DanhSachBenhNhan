@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
+using WebApplication1.ModelSTOs;
 
 namespace WebApplication1.Data
 {
@@ -12,6 +13,7 @@ namespace WebApplication1.Data
         public DbSet<DanToc> DanTocs { get; set; }
         public DbSet<TinhThanh> TinhThanhs { get; set; }
         public DbSet<BenhNhanSTO> BenhNhanSTOs { get; set; }
+        public DbSet<GoiKhamSTO> GoiKhamSTOs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +21,7 @@ namespace WebApplication1.Data
             modelBuilder.Entity<BenhNhan>().ToTable("BenhNhan");
             modelBuilder.Entity<DanToc>().ToTable("DanToc");
             modelBuilder.Entity<BenhNhanSTO>().HasNoKey();
+            modelBuilder.Entity<GoiKhamSTO>().HasNoKey();
             modelBuilder.Entity<TinhThanh>()
     .Property(tt => tt.VietTat)
     .HasColumnType("nvarchar(max)");

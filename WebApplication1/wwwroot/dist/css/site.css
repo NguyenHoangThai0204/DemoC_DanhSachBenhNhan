@@ -1,0 +1,300 @@
+﻿
+html {
+    font-size: 14px; /* Smaller base font for mobile-first */
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+#modalTitle{
+    font-size: 1.8rem; /* Adjusted for better readability on mobile */
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Responsive table */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.column-toggle-dropdown:hover .dropdown-menu {
+    display: block;
+} 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 600px; /* Minimum width for tables */
+}
+
+.table-wrapper th, .table-wrapper td {
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+    font-size: 1.30rem; /* Smaller font for mobile */
+}
+
+.table-wrapper th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    font-size: 1.35rem;
+    position: sticky;
+    text-align: center;
+}
+label {
+    font-size: 1.35rem !important;
+    font-weight: 600; 
+    margin: 9px 0 6px 0;
+}
+
+input {
+    font-size: 1.35rem !important;
+    margin: 5px 0;
+    font-weight: 400;
+}
+select {
+    font-size: 1.35rem !important;
+    margin: 5px 0;
+    font-weight: 400;
+}
+select option {
+    font-size: 1.35rem !important;
+}
+.tdTien{
+        text-align: right !important;
+}
+/*/* Button container responsive layout */
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+/* Responsive buttons */
+.btn {
+    margin: 0;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    white-space: nowrap;
+    width: 100%; /* Full width buttons on mobile */
+    box-sizing: border-box;
+}
+
+/* Dropdown adjustments for mobile */
+.column-toggle-dropdown {
+    position: relative;
+    width: 100%;
+    padding: 0 5px;
+}
+
+    .column-toggle-dropdown .dropdown-menu {
+        width: 100%;
+        max-width: 300px;
+        font-size: 1rem;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+.dropdown-menu {
+    padding:5px;
+}
+
+.dropdown-menu label {
+    font-size: 1.25rem;
+}
+
+    .dropdown-menu label input {
+        width: 22px;
+        height: 22px;
+    }
+
+/* Form elements */
+.form-control {
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+/* Modal adjustments for mobile */
+.custom-modal-width {
+    max-width: 100%;
+    margin: 10px;
+}
+
+/* Pagination */
+.pagination .page-link {
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+.mb-3 {
+		margin-bottom: 0.5rem !important; 
+	}
+/* Datepicker adjustments */
+.datepicker {
+    font-size: 0.6rem;
+    transform: scale(1.1);
+    transform-origin: top left;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 5px;
+    z-index: 99999 !important;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Dropdown menus */
+#danTocDropdown, .tinh-thanh-dropdown {
+    font-size: 1rem;
+    max-height: 150px;
+}
+
+/* Navbar adjustments */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    padding: 8px 10px;
+}
+.tinh-thanh-item.active,
+.dan-toc-item.active {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.dan-toc-container {
+    position: relative; /* cha chứa dropdown */
+}
+
+.tinh-thanh-dropdown {
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    font-size: 1.3rem;
+    z-index: 1055;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.tinh-thanh-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+    .tinh-thanh-item:hover {
+        background-color: #f0f0f0;
+    }
+
+#danTocDropdown {
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    font-size: 1.3rem; /* Tăng kích thước chữ ở đây */
+    z-index: 1055;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.dan-toc-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 1.3rem; /* Hoặc điều chỉnh theo ý bạn */
+}
+
+    .dan-toc-item:hover {
+        background-color: #f0f0f0;
+    }
+
+.container_goiKham {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+    .container_goiKham.left {
+        display: block;
+        width: 19%;
+    }
+    .container_goiKham.right {
+        width: 80%;
+        display:block;
+    }
+    h2{
+        text-align:center;
+    }
+    .container_goiKham.left .row {
+/*        display:block;*/
+    }
+    .container_goiKham.left .row button {
+        width:100%;
+        margin: 8px 0;
+    }
+@media (min-width: 768px) {
+    .mb-3[style*="flex: 1 1 100%"] {
+        flex: 1 1 50% !important;
+    }
+
+    #searchInputTen {
+        font-size: 1.35rem !important;
+        width: 70% !important;
+    }
+}
+/* Media queries for larger devices */
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .button-container {
+        flex-direction: row; /* Side by side on larger screens */
+        align-items: center;
+    }
+
+    .btn {
+        width: auto;
+        margin: 0;
+    }
+        .btn.btn-secondary, .btn.btn-success {
+            margin: 0 !important;
+        }
+
+    table {
+        min-width: auto;
+    }
+
+    th, td {
+        font-size: 1.1rem;
+        padding: 8px;
+    }
+
+    .datepicker {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        width: auto;
+        transform: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-modal-width {
+        max-width: 900px;
+    }
+
+    th, td {
+        font-size: 1.25rem;
+    }
+
+    .btn {
+        font-size: 1.25rem;
+    }
+}

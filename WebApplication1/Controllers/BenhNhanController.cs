@@ -68,7 +68,7 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("DanhSach", new { page = currentPage, pageSize });
             }
 
-            TempData["ErrorMessage"] = "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.";
+            TempData["ErrorMessage"] = "Tỉnh thành không hợp lệ. Vui lòng kiểm tra lại.";
             //return RedirectToAction("DanhSach", new { page = currentPage, pageSize = ViewBag.PageSize });
             return RedirectToAction("DanhSach", new { page = currentPage, pageSize });
         }
